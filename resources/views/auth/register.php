@@ -1,3 +1,8 @@
+<?php
+    session_start();
+
+    session_destroy();
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -19,19 +24,29 @@
                     <div class="flex flex-col md:w-2/4 mb-6 md:mb-0">
                         <label class="ml-1" for="username">Username <span class="text-red-600">*</span></label>
                         <input class="p-3 w-full rounded-lg border-2 border-red-600" type="text" name="username" id="username" placeholder="Enter your username">
+                        <?php if(isset($_SESSION['emptyUsername'])) echo "<p class='text-red-500 mt-1'>".$_SESSION['emptyUsername']."</p>" ?> 
                     </div>
                     <div class="flex flex-col md:w-2/4">
                         <label class="ml-1" for="email">Email <span class="text-red-600">*</span></label>
                         <input class="p-3 w-full rounded-lg border-2 border-red-600" type="text" name="email" id="email" placeholder="Enter your email">
+                        <?php 
+                            if(isset($_SESSION['emptyEmail'])) echo "<p class='text-red-500 mt-1'>".$_SESSION['emptyEmail']."</p>";
+                            if(isset($_SESSION['invalidEmail'])) echo "<p class='text-red-500 mt-1'>".$_SESSION['invalidEmail']."</p>";
+                        ?> 
                     </div>
                 </div>
                 <div class="flex flex-col mb-6">
                     <label class="ml-1" for="password">Pssword <span class="text-red-600">*</span></label>
                     <input class="p-3 w-full rounded-lg border-2 border-red-600" type="password" name="password" id="password" placeholder="Enter password between 4 - 8 character">
+                    <?php 
+                        if(isset($_SESSION['emptyPassword'])) echo "<p class='text-red-500 mt-1'>".$_SESSION['emptyPassword']."</p>";
+                        if(isset($_SESSION['notSamePassword'])) echo "<p class='text-red-500 mt-1'>".$_SESSION['notSamePassword']."</p>";
+                    ?> 
                 </div>
                 <div class="flex flex-col mb-8">
                     <label class="ml-1" for="confirm_password">Confirm Password <span class="text-red-600">*</span></label>
                     <input class="p-3 w-full rounded-lg border-2 border-red-600" type="password" name="confirm_password" id="confirm_password" placeholder="Enter password again">
+                    <?php if(isset($_SESSION['emptyConfirmPassword'])) echo "<p class='text-red-500 mt-1'>".$_SESSION['emptyConfirmPassword']."</p>" ?>
                 </div>
 
                 <div class="w-full md:flex md:justify-center">
