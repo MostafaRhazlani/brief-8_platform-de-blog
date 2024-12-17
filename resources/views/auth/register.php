@@ -54,7 +54,7 @@
                 </div>
     
                 <div>
-                    <span>Go back to &nbsp;<a href="#" class="text-red-600">Login</a></span>
+                    <span>Go back to &nbsp;<a href="./login.php" class="text-red-600">Login</a></span>
                 </div>
             </form>
         </div>
