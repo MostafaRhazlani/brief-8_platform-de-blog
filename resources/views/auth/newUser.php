@@ -13,7 +13,7 @@
     if(empty($username)) {
         $countErrors[] = 1;
         $_SESSION['emptyUsername'] = 'username field is required!';
-        header('location:register.php');
+
     }
 
     // check if input email is empty
@@ -54,9 +54,11 @@
         mysqli_stmt_bind_param($resultQuery, "sssi", $username, $email, $hashedPassword, $idRole);
 
         if(mysqli_stmt_execute($resultQuery)) {
-            header('location: register.php');
+            header('location: login.php');
         } else {
             echo "error";
         }
+    } else {
+        header('location:register.php');
     }
 ?>
