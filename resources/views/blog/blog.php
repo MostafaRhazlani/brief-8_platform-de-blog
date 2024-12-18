@@ -47,6 +47,10 @@
                 </div>
             </div>
             <div class="p-4">
+                <div class="flex gap-1 mb-2">
+                    <span class="bg-red-400 rounded-sm py-1 px-2 text-[12px] text-white">front-end</span>
+                    <span class="bg-green-400 rounded-sm py-1 px-2 text-[12px] text-white">back-end</span>
+                </div>
                 <h1 class="font-semibold text-lg mb-2">My first picture in this app</h1>
                 <p>
                     Lorem, ipsum dolor sit amet consectetur adipisicing elit.
