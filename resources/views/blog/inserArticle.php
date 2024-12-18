@@ -5,7 +5,7 @@
     // get all names in input
     $title = isset($_POST['title']) ? $_POST['title'] : '';
     $content = isset($_POST['content']) ? $_POST['content'] : '';
-    $idCategory = isset($_POST['idCategory']) ? $_POST['idCategory'] : '';
+    $idCategory = isset($_POST['idCategory']) ? $_POST['idCategory'] : [];
     $image = isset($_POST['image']) ? $_POST['image'] : '';
     $idUser = isset($_SESSION['user']) ? $_SESSION['user']['id'] : 0;
 
@@ -20,9 +20,12 @@
     
         // insert id article and category in table tags
         $insertTag = mysqli_prepare($conn, "INSERT INTO tags(idArticle, idCategory) VALUES(?,?)");
-        mysqli_stmt_bind_param($insertTag, "ii", $idArticle['id'], $idCategory);
-        if(mysqli_stmt_execute($insertTag)) {
-            header('location: blog.php');
+
+        foreach($idCategory as $id) {
+            mysqli_stmt_bind_param($insertTag, "ii", $idArticle['id'], $id);
+            if(mysqli_stmt_execute($insertTag)) {
+                header('location: blog.php');
+            }
         }
     }
 ?>
