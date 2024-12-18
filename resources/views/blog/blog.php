@@ -32,11 +32,11 @@
                             </div>
                         </div>
                         <div class="relative">
-                            <span id="showActions" class="text-2xl cursor-pointer hover:text-red-600">
+                            <span class="showActions text-2xl cursor-pointer hover:text-red-600" data-id="<?php echo $article['id'] ?>">
                                 <i class="fa-solid fa-ellipsis-vertical"></i>
                             </span>
-                            <div id="popupActions" class="absolute hidden -right-2 mt-2 w-32 bg-white shadow-[0px_0px_5px_1px_#c2c2c2] p-1 rounded-md">
-                                <a href="#" id="showFormEditArticle" class="flex items-center text-sm p-1 hover:bg-gray-200 cursor-pointer rounded-sm">
+                            <div class="popupActions absolute hidden -right-2 mt-2 w-32 bg-white shadow-[0px_0px_5px_1px_#c2c2c2] p-1 rounded-md" data-id="<?php echo $article['id'] ?>">
+                                <a href="#" class="showFormEditArticle flex items-center text-sm p-1 hover:bg-gray-200 cursor-pointer rounded-sm">
                                     <i class="fa-solid fa-pen-to-square"></i>&nbsp;Edit article
                                 </a>
                             </div>
