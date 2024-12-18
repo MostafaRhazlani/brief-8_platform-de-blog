@@ -1,5 +1,9 @@
 <?php 
     require_once('../../../isLogged/isLogged.php');
+    require_once('../../../connectdb/connectiondb.php'); 
+
+    $getCategories = mysqli_query($conn, "SELECT * FROM categories");
+
 ?>
 
 <?php include('../layout/_HEAD.php') ?>
@@ -80,29 +84,31 @@
             </div>
         </div>
 
-        <form action="">
+        <form action="./inserArticle.php" method="post">
             <div class="w-full">
                 <div class="flex flex-col mb-4">
                     <label for="title">Title</label>
-                    <input type="text" id="title" placeholder="Enter title here" class="w-full p-2 mt-1 rounded-md border-2 border-red-600">
+                    <input type="text" id="title" name="title" placeholder="Enter title here" class="w-full p-2 mt-1 rounded-md border-2 border-red-600">
                 </div>
                 <div class="flex flex-col mb-4">
                     <label for="content">Content</label>
-                    <textarea class="w-full min-h-32 p-2 mt-1 rounded-md border-2 border-red-600" name="" id="content" placeholder="add content here"></textarea>
+                    <textarea class="w-full min-h-32 p-2 mt-1 rounded-md border-2 border-red-600" name="content" id="content" placeholder="add content here"></textarea>
                 </div>
 
                 <div class="inputTags hidden flex flex-col mb-4">
                     <label for="">Choose Tag</label>
-                    <select class="w-full p-2 mt-1 rounded-md border-2 border-red-600" name="" id="">
-                        <option value="">front-end</option>
-                        <option value="">desgin</option>
-                        <option value="">back-end</option>
+                    <select name="idCategory" class="w-full p-2 mt-1 rounded-md border-2 border-red-600" id="">
+                        <?php if($getCategories) { ?>
+                            <?php while($category = mysqli_fetch_assoc($getCategories)) { ?>
+                                <option value="<?php echo $category['id'] ?>"><?php echo $category['nameCategory'] ?></option>
+                            <?php } ?>
+                        <?php } ?>
                     </select>
                 </div>
 
                 <div class="inputImage hidden">
                     <label for="">Upload image</label>
-                    <input type="file" class="w-full p-2 mt-1 rounded-md border-2 border-red-600">
+                    <input name="image" type="file" class="w-full p-2 mt-1 rounded-md border-2 border-red-600">
                 </div>
     
                 <div class="flex justify-between items-center border-2 rounded-md mt-4 py-2 px-4">
