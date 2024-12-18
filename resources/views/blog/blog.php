@@ -31,9 +31,16 @@
                                 <p class="text-gray-500 text-sm"><?php echo $article['email'] ?></p>
                             </div>
                         </div>
-                        <span class="text-2xl">
-                            <i class="fa-solid fa-ellipsis-vertical"></i>
-                        </span>
+                        <div class="relative">
+                            <span id="showActions" class="text-2xl cursor-pointer hover:text-red-600">
+                                <i class="fa-solid fa-ellipsis-vertical"></i>
+                            </span>
+                            <div id="popupActions" class="absolute hidden -right-2 mt-2 w-32 bg-white shadow-[0px_0px_5px_1px_#c2c2c2] p-1 rounded-md">
+                                <a href="#" id="showFormEditArticle" class="flex items-center text-sm p-1 hover:bg-gray-200 cursor-pointer rounded-sm">
+                                    <i class="fa-solid fa-pen-to-square"></i>&nbsp;Edit article
+                                </a>
+                            </div>
+                        </div>
                     </div>
                     <div class="h-80 flex items-center justify-center bg-[#200E32]">
                         <img class="h-full object-contain" src="../../img/istockphoto-1392528328-612x612.jpg" alt="">
@@ -79,5 +86,6 @@
 </div>
 
 <?php include('./addArticle.php') ?>
+<?php include('./editArticle.php') ?>
 
 <?php include('../layout/_FOOTER.php') ?>
