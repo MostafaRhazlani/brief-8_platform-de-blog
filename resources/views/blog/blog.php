@@ -4,6 +4,8 @@
 
     $getCategories = mysqli_query($conn, "SELECT * FROM categories");
 
+    $getArticles = mysqli_query($conn,"SELECT articles.*, users.username, users.email FROM articles inner join users on users.id = articles.idUser ORDER BY id DESC");
+    
 ?>
 
 <?php include('../layout/_HEAD.php') ?>
@@ -17,52 +19,62 @@
                 <h1>create article</h1>
             </div>
         </div>
-        <div class="w-full mb-5">
-            <div class="flex justify-between items-center p-3">
-                <div class="flex">
-                    <img class="mr-3 object-cover w-12 h-12 rounded-full" src="../../img/istockphoto-1392528328-612x612.jpg" alt="">
-                    
-                    <div>
-                        <p class="font-semibold">@ramos_rodigier</p>
-                        <p class="text-gray-500 text-sm">ramos@gmail.com</p>
+        <?php if($getArticles) { ?>
+            <?php while($article = mysqli_fetch_assoc($getArticles)) { ?>
+                <div class="w-full mb-3">
+                    <div class="flex justify-between items-center p-3">
+                        <div class="flex">
+                            <img class="mr-3 object-cover w-12 h-12 rounded-full" src="../../img/149071.png" alt="">
+                            
+                            <div>
+                                <p class="font-semibold"><?php echo $article['username'] ?></p>
+                                <p class="text-gray-500 text-sm"><?php echo $article['email'] ?></p>
+                            </div>
+                        </div>
+                        <span class="text-2xl">
+                            <i class="fa-solid fa-ellipsis-vertical"></i>
+                        </span>
+                    </div>
+                    <div class="h-80 flex items-center justify-center bg-[#200E32]">
+                        <img class="h-full object-contain" src="../../img/istockphoto-1392528328-612x612.jpg" alt="">
+                    </div>
+                    <div class="flex p-4 justify-between border-b-2">
+                        <div class="flex gap-3">
+                            <a href="#" class="hover:scale-110 transition duration-300 ease-in-out text-3xl cursor-pointer">
+                                <i class="fa-regular fa-heart"></i>
+                            </a>
+                            
+                            <a href="#" class="hover:scale-110 transition duration-300 ease-in-out text-3xl cursor-pointer">
+                                <i class="fa-regular fa-comment"></i>
+                            </a>
+                        </div>
+                        <div>
+                            <a href="#" class="hover:scale-110 transition duration-300 ease-in-out text-3xl cursor-pointer">
+                                <i class="fa-regular fa-bookmark"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <div class="flex gap-1 mb-2 flex-wrap">
+                            <?php
+                                $idArticle = $article['id'];
+                                $getTags = mysqli_query($conn, "SELECT tags.*, categories.nameCategory FROM tags 
+                                    INNER JOIN categories ON categories.id = tags.idCategory WHERE tags.idArticle = $idArticle");
+                            ?>
+                            <?php if($getTags) {?>
+                                <?php while($tag = mysqli_fetch_assoc($getTags)) {?>
+                                        <span class="bg-blue-400 rounded-sm py-1 px-2 text-[12px] text-white"><?php echo $tag['nameCategory'] ?></span>
+                                <?php } ?>
+                            <?php } ?>
+                        </div>
+                        <h1 class="font-semibold text-lg mb-2"><?php echo $article['title'] ?></h1>
+                        <p class="break-words">
+                            <?php echo $article['content'] ?>
+                        </p>
                     </div>
                 </div>
-                <span class="text-2xl">
-                    <i class="fa-solid fa-ellipsis-vertical"></i>
-                </span>
-            </div>
-            <div class="h-80 flex items-center justify-center bg-[#200E32]">
-                <img class="h-full object-contain" src="../../img/istockphoto-1392528328-612x612.jpg" alt="">
-            </div>
-            <div class="flex p-4 justify-between border-b-2">
-                <div class="flex gap-3">
-                    <a href="#" class="hover:scale-110 transition duration-300 ease-in-out text-3xl cursor-pointer">
-                        <i class="fa-regular fa-heart"></i>
-                    </a>
-                    
-                    <a href="#" class="hover:scale-110 transition duration-300 ease-in-out text-3xl cursor-pointer">
-                        <i class="fa-regular fa-comment"></i>
-                    </a>
-                </div>
-                <div>
-                    <a href="#" class="hover:scale-110 transition duration-300 ease-in-out text-3xl cursor-pointer">
-                        <i class="fa-regular fa-bookmark"></i>
-                    </a>
-                </div>
-            </div>
-            <div class="p-4">
-                <div class="flex gap-1 mb-2">
-                    <span class="bg-red-400 rounded-sm py-1 px-2 text-[12px] text-white">front-end</span>
-                    <span class="bg-green-400 rounded-sm py-1 px-2 text-[12px] text-white">back-end</span>
-                </div>
-                <h1 class="font-semibold text-lg mb-2">My first picture in this app</h1>
-                <p>
-                    Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                    Debitis doloremque deserunt, saepe ratione sit aut! Dolor
-                    excepturi ullam odit sed.
-                </p>
-            </div>
-        </div>
+            <?php } ?>
+        <?php } ?>
     </div>
 </div>
 
@@ -97,7 +109,7 @@
 
                 <div class="inputTags hidden flex flex-col mb-4">
                     <label for="">Choose Tag</label>
-                    <select name="idCategory" class="w-full p-2 mt-1 rounded-md border-2 border-red-600" id="">
+                    <select name="idCategory[]" multiple class="w-full p-2 mt-1 rounded-md border-2 border-red-600" id="">
                         <?php if($getCategories) { ?>
                             <?php while($category = mysqli_fetch_assoc($getCategories)) { ?>
                                 <option value="<?php echo $category['id'] ?>"><?php echo $category['nameCategory'] ?></option>
