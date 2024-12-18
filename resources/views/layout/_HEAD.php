@@ -13,7 +13,7 @@
 </head>
 <body class="font-[poppins]">
 
-<div class="relative h-screen">
+<div class="relative h-full">
     <div class="p-3 md:pl-20 fixed top-0 z-20 bg-white w-full shadow-[0px_0px_5px_1px_#c2c2c2]">
         <div class="flex items-center justify-between">
             <div class="flex items-center gap-4">
