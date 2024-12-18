@@ -16,7 +16,23 @@
 <div class="relative h-screen">
     <div class="p-3 md:pl-28 fixed top-0 z-20 bg-white w-full shadow-[0px_0px_5px_1px_#c2c2c2]">
         <div class="flex items-center gap-6">
-            <img width="60" class="rounded-full" src="../../img/photo youcode.jpg" alt="">
+            <div class="relative">
+                <div class="cursor-pointer hover:opacity-60 showPopupUser">
+                    <div class="absolute w-5 h-5 bottom-0 bg-white rounded-full">
+                        <div class="flex justify-center items-center">
+                            <span class="text-sm font-bold text-gray-500">
+                                <i class="fa-solid fa-circle-chevron-down"></i>
+                            </span>
+                        </div>
+                    </div>
+                    <img width="60" class="rounded-full" src="../../img/photo youcode.jpg" alt="">
+                </div>
+
+                <div class="popupUser hidden absolute mt-2 w-32 bg-white shadow-[0px_0px_5px_1px_#c2c2c2] p-2 rounded-md">
+                    <a href class="flex items-center p-1 hover:bg-gray-200 cursor-pointer rounded-sm"><i class="fa-solid fa-user"></i>&nbsp;Profile</a>
+                    <a href="../auth/logout.php" class="flex items-center p-1 hover:bg-gray-200 cursor-pointer rounded-sm"><i class="fa-solid fa-right-from-bracket"></i>&nbsp;Logout</a>
+                </div>
+            </div>
 
             <a href="#" class="text-2xl">
                 <i class="fa-regular fa-bell"></i>

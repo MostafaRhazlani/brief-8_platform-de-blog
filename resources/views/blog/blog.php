@@ -8,7 +8,7 @@
 <div class="w-full md:w-4/6 lg:w-[40%] md:mx-auto pt-24">
     <div class="w-full bg-white shadow-[0px_0px_2px_#9b9b9b] rounded-lg">
         <div class="w-full p-4">
-            <div class="showFormArticle py-3 px-5 rounded-full bg-gray-200 text-gray-500 font-medium cursor-pointer hover:bg-gray-300 flex items-center gap-2">
+            <div class="showFormArticle py-3 px-5 rounded-md bg-gray-200 text-gray-500 font-medium cursor-pointer hover:bg-gray-300 flex items-center gap-2">
                 <i class="fa-solid fa-newspaper"></i>
                 <h1>create article</h1>
             </div>
@@ -16,7 +16,7 @@
         <div class="w-full mb-5">
             <div class="flex justify-between items-center p-3">
                 <div class="flex">
-                    <img width="" class="mr-3 object-cover w-12 h-12 rounded-full" src="../../img/istockphoto-1392528328-612x612.jpg" alt="">
+                    <img class="mr-3 object-cover w-12 h-12 rounded-full" src="../../img/istockphoto-1392528328-612x612.jpg" alt="">
                     
                     <div>
                         <p class="font-semibold">@ramos_rodigier</p>
@@ -59,7 +59,7 @@
 </div>
 
 <!-- form create article -->
-<div class="formArticle w-full h-full absolute top-0 z-30 bg-slate-200 bg-opacity-75 flex justify-center items-center">
+<div class="formArticle w-full h-full absolute top-0 z-30 bg-slate-200 bg-opacity-75 flex justify-center items-center hidden">
     <div class="bg-white p-4 rounded-lg w-5/6 md:w-3/5 lg:w-2/6 relative">
         
         <span id="close" class="absolute right-4 top-3 text-3xl text-gray-500 cursor-pointer hover:text-red-600">

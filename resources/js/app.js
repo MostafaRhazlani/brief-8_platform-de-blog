@@ -6,6 +6,9 @@ const showInputTags = document.querySelector('.showInputTags');
 const inputImage = document.querySelector('.inputImage');
 const inputTags = document.querySelector('.inputTags');
 
+const showPopupUser = document.querySelector('.showPopupUser');
+const popupUser = document.querySelector('.popupUser');
+
 const close = document.querySelector('#close');
 
 showFormArticle.addEventListener('click', () => {
@@ -22,4 +25,8 @@ showInputImage.addEventListener('click', () => {
 
 showInputTags.addEventListener('click', () => {
     inputTags.classList.toggle('hidden');
+})
+
+showPopupUser.addEventListener('click', () => {
+    popupUser.classList.toggle('hidden')
 })
