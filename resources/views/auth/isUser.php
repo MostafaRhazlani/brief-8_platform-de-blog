@@ -35,10 +35,10 @@
 
     if(count($countErrors) == 0) {
         if($resultUser['idRole'] == 1) {
-            $_SESSION['token'] = password_hash($email, PASSWORD_BCRYPT);
+            $_SESSION['user'] = $resultUser;
             header('location:/resources/views/page_admin/dashboard.php');
         } else {
-            $_SESSION['token'] = password_hash($email, PASSWORD_BCRYPT);
+            $_SESSION['user'] = $resultUser;
             header('location:/resources/views/blog/blog.php');
         }
     } else {
