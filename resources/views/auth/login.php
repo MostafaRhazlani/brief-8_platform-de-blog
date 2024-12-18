@@ -19,7 +19,7 @@
 <body class="font-[Poppins]">
     <div class="h-screen w-full">
         <div class="w-5/6 md:w-3/5 lg:w-2/6 mx-auto mt-40 bg-white shadow-[0px_0px_4px_#a5a4a4] rounded-md p-4">
-            <h1 class="text-4xl text-center mb-10">Sgin up</h1>
+            <h1 class="text-4xl text-center mb-10">Sgin in</h1>
             <form action="./isUser.php" method="post">
                 <div class="flex flex-col mb-6">
                     <label class="ml-1" for="email">Email <span class="text-red-600">*</span></label>
@@ -39,7 +39,7 @@
                     ?> 
                 </div>
                 <div class="w-full md:flex md:justify-center">
-                    <button class="bg-red-600 mb-5 px-7 py-3 w-full md:w-3/5 hover:bg-red-500 text-white rounded-lg">Sgin up</button>
+                    <button class="bg-red-600 mb-5 px-7 py-3 w-full md:w-3/5 hover:bg-red-500 text-white rounded-lg">Sgin in</button>
                 </div>
     
                 <div>
