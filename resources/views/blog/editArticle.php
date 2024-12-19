@@ -36,42 +36,45 @@
             </div>
         </div>
 
-        <form action="" method="post">
+        <form action="./updateArticle.php" method="post">
             <div class="w-full">
-                <div class="flex flex-col mb-4">
-                    <label for="title">Title</label>
-                    <input type="text" id="title" name="title" value="<?php echo $resultArticle['title'] ?>" placeholder="Enter title here" class="w-full p-1 mt-1 rounded-md border-2 border-red-600">
-                </div>
-                <div class="flex flex-col mb-4">
-                    <label for="content">Content</label>
-                    <textarea class="w-full min-h-20 max-h-20 p-2 mt-1 rounded-md border-2 border-red-600" name="content" id="content" placeholder="add content here"><?php echo $resultArticle['content'] ?></textarea>
-                </div>
-
-                <div class="inputTags hidden flex flex-col mb-4">
-                    <label for="">Choose Tag</label>
-                    <select name="idCategory[]" multiple class="w-full p-2 mt-1 rounded-md border-2 border-red-600" id="">
-                        <?php if($getCategories) { ?>
-                            <?php while($category = mysqli_fetch_assoc($getCategories)) { ?>
-                                <option value="<?php echo $category['id'] ?>"><?php echo $category['nameCategory'] ?></option>
-                            <?php } ?>
-                        <?php } ?>
-                    </select>
-                </div>
-
-                <div class="inputImage hidden">
-                    <label for="">Upload image</label>
-                    <input name="image" type="file" class="w-full p-1 mt-1 rounded-md border-2 border-red-600">
-                </div>
-    
-                <div class="flex justify-between items-center border-2 rounded-md mt-4 py-2 px-4">
-                    <h2>Add to your article</h2>
-                    <div>
-                        <span class="showInputTags text-3xl text-gray-400 hover:text-[#200E32] cursor-pointer">
-                            <i class="fa-solid fa-layer-group"></i>
-                        </span>&nbsp;
-                        <span class="showInputImage text-3xl text-gray-400 hover:text-[#200E32] cursor-pointer"><i class="fa-solid fa-file-image"></i></span>
+                <?php if($resultArticle) { ?>
+                    <div class="flex flex-col mb-4">
+                        <?php $_SESSION['idArticle'] = $resultArticle['id'];?>
+                        <label for="title">Title</label>
+                        <input type="text" id="title" name="title" value="<?php echo $resultArticle['title'] ?>" placeholder="Enter title here" class="w-full p-1 mt-1 rounded-md border-2 border-red-600">
                     </div>
-                </div>
+                    <div class="flex flex-col mb-4">
+                        <label for="content">Content</label>
+                        <textarea class="w-full min-h-20 max-h-20 p-2 mt-1 rounded-md border-2 border-red-600" name="content" id="content" placeholder="add content here"><?php echo $resultArticle['content'] ?></textarea>
+                    </div>
+
+                    <div class="inputTags hidden flex flex-col mb-4">
+                        <label for="">Choose Tag</label>
+                        <select name="idCategory[]" multiple class="w-full p-2 mt-1 rounded-md border-2 border-red-600" id="">
+                            <?php if($getCategories) { ?>
+                                <?php while($category = mysqli_fetch_assoc($getCategories)) { ?>
+                                    <option value="<?php echo $category['id'] ?>"><?php echo $category['nameCategory'] ?></option>
+                                <?php } ?>
+                            <?php } ?>
+                        </select>
+                    </div>
+
+                    <div class="inputImage hidden">
+                        <label for="">Upload image</label>
+                        <input name="image" type="file" class="w-full p-1 mt-1 rounded-md border-2 border-red-600">
+                    </div>
+        
+                    <div class="flex justify-between items-center border-2 rounded-md mt-4 py-2 px-4">
+                        <h2>Add to your article</h2>
+                        <div>
+                            <span class="showInputTags text-3xl text-gray-400 hover:text-[#200E32] cursor-pointer">
+                                <i class="fa-solid fa-layer-group"></i>
+                            </span>&nbsp;
+                            <span class="showInputImage text-3xl text-gray-400 hover:text-[#200E32] cursor-pointer"><i class="fa-solid fa-file-image"></i></span>
+                        </div>
+                    </div>
+                <?php } ?>
             </div>
 
             <div class="w-full">
