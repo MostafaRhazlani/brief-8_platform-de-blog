@@ -14,7 +14,7 @@
             <button class="py-2 px-4 bg-red-600 rounded-md hover:bg-red-500 text-white md:mr-3 mt-2 md:mt-0"><i class="fa-solid fa-circle-plus"></i> Add Category</button>
             <input class="border-2 border-red-600 rounded-md py-2 px-4" type="text" placeholder="Enter category" name="category">
         </div>
-        <button class="py-2 px-4 bg-red-600 rounded-md hover:bg-red-500 text-white"><i class="fa-solid fa-arrow-down-a-z"></i> Sort Articles</button>
+        <button class="py-2 px-4 bg-red-600 rounded-md hover:bg-red-500 text-white"><i class="fa-solid fa-arrow-down-a-z"></i> Sort Categories</button>
     </div>
     <div class="w-full h-5/6 shadow-[0px_0px_4px_#c9c9c9] rounded-md">
         <div class="p-4">
