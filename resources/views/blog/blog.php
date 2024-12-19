@@ -1,5 +1,5 @@
 <?php 
-    require_once('../../../isLogged/isLogged.php');
+    session_start();
     require_once('../../../connectdb/connectiondb.php'); 
 
     $getCategories = mysqli_query($conn, "SELECT * FROM categories");
