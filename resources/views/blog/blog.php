@@ -13,12 +13,14 @@
 
 <div class="w-full md:w-4/6 lg:w-[40%] md:mx-auto pt-24">
     <div class="w-full bg-white shadow-[0px_0px_2px_#9b9b9b] rounded-lg">
+        <?php if(isset($_SESSION['user'])) { ?>
         <div class="w-full p-4">
             <div class="showFormArticle py-3 px-5 rounded-md bg-gray-200 text-gray-500 font-medium cursor-pointer hover:bg-gray-300 flex items-center gap-2">
                 <i class="fa-solid fa-newspaper"></i>
                 <h1>create article</h1>
             </div>
         </div>
+        <?php } ?>
         <?php if($getArticles) { ?>
             <?php while($article = mysqli_fetch_assoc($getArticles)) { ?>
                 <div class="w-full mb-3">
@@ -39,15 +41,19 @@
                                 <i class="fa-solid fa-ellipsis-vertical"></i>
                             </span>
 
-                            <div class="popupActions absolute hidden -right-2 mt-2 w-32 bg-white shadow-[0px_0px_5px_1px_#c2c2c2] p-1 rounded-md" data-id="<?php echo $article['id'] ?>">
+                            <div class="popupActions absolute hidden -right-2 mt-2 w-32 bg-white shadow-[0px_0px_5px_1px_#c2c2c2] p-1 rounded-sm" data-id="<?php echo $article['id'] ?>">
                                 <?php if($_SESSION['user']['id'] == $article['idUser']) { ?>
-                                    <a href="./blog.php?idArticle=<?php echo $article['id'] ?>" class="showFormEditArticle flex items-center text-sm p-1 hover:bg-gray-200 cursor-pointer rounded-sm">
+                                    <a href="./blog.php?idArticle=<?php echo $article['id'] ?>" class="flex items-center text-sm p-1 hover:bg-gray-200 cursor-pointer rounded-sm">
                                         <i class="fa-solid fa-pen-to-square"></i>&nbsp;Edit article
                                     </a>
+                                    <a href="./blog.php?idDeleteArticle=<?php echo $article['id'] ?>" class="flex items-center text-red-700 text-sm p-1 hover:bg-red-200 cursor-pointer rounded-sm">
+                                        <i class="fa-solid fa-trash-can"></i>&nbsp;Delete article
+                                    </a>
+                                <?php } else { ?>
+                                    <a href="./blog.php?idArticle=<?php echo $article['id'] ?>" class="showFormEditArticle flex items-center text-sm p-1 hover:bg-gray-200 cursor-pointer rounded-sm">
+                                        <i class="fa-solid fa-bug"></i>&nbsp;Report
+                                    </a>
                                 <?php } ?>
-                                <a href="./blog.php?idArticle=<?php echo $article['id'] ?>" class="showFormEditArticle flex items-center text-sm p-1 hover:bg-gray-200 cursor-pointer rounded-sm">
-                                    <i class="fa-solid fa-bug"></i>&nbsp;Report
-                                </a>
                             </div>
                         </div>
                     </div>
@@ -99,6 +105,8 @@
         <?php } ?>
     </div>
 </div>
+
+<?php include('./deleteArticle.php') ?>
 
 <?php include('./addArticle.php') ?>
 <?php include('./editArticle.php') ?>
