@@ -39,7 +39,7 @@
                                         <td class="px-4 py-4"><?php echo $article['image'] ?></td>
                                         <td class="px-4 py-4"><?php echo $article['username'] ?></td>
                                         <td class="px-4 py-4 min-w-28">
-                                            <a href="#" class="showFormDelete bg-red-700 rounded-full px-2 py-1 text-white text-[13px] hover:bg-red-500 cursor-pointer">
+                                            <a href="./articles.php?idDeleteArticle=<?php echo $article['id'] ?>" class="showFormDelete bg-red-700 rounded-full px-2 py-1 text-white text-[13px] hover:bg-red-500 cursor-pointer">
                                                 <i class="fa-regular fa-trash-can"></i>&nbsp;Delete
                                             </a>
                                         </td>
@@ -50,10 +50,10 @@
                     </table>
                 </div>
             </div>
-
         </div>
-    
     </div>
 </div>
+
+<?php include('./deleteArticle.php') ?>
 
 <?php include('../../layout/_FOOTER.php') ?>
