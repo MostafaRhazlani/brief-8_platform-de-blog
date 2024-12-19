@@ -16,33 +16,39 @@
 <div class="relative h-full">
     <div class="p-3 md:pl-20 fixed top-0 z-20 bg-white w-full shadow-[0px_0px_5px_1px_#c2c2c2]">
         <div class="flex items-center justify-between">
-            <div class="flex items-center gap-4">
-                <div class="relative">
-                    <div class="cursor-pointer hover:opacity-60 showPopupUser">
-                        <div class="absolute w-5 h-5 bottom-0 bg-white rounded-full">
-                            <div class="flex justify-center items-center">
-                                <span class="text-sm font-bold text-gray-500">
-                                    <i class="fa-solid fa-circle-chevron-down"></i>
-                                </span>
+            <?php if(isset($_SESSION['user'])) { ?>
+                <div class="flex items-center gap-4">
+                    <div class="relative">
+                        <div class="cursor-pointer hover:opacity-60 showPopupUser">
+                            <div class="absolute w-5 h-5 bottom-0 bg-white rounded-full">
+                                <div class="flex justify-center items-center">
+                                    <span class="text-sm font-bold text-gray-500">
+                                        <i class="fa-solid fa-circle-chevron-down"></i>
+                                    </span>
+                                </div>
                             </div>
+                            <img width="60" class="rounded-full" src="../../img/photo youcode.jpg" alt="">
                         </div>
-                        <img width="60" class="rounded-full" src="../../img/photo youcode.jpg" alt="">
+        
+                        <div class="popupUser hidden absolute mt-2 w-32 bg-white shadow-[0px_0px_5px_1px_#c2c2c2] p-2 rounded-md">
+                            <a href class="flex items-center p-1 hover:bg-gray-200 cursor-pointer rounded-sm"><i class="fa-solid fa-user"></i>&nbsp;Profile</a>
+                            <a href="../auth/logout.php" class="flex items-center p-1 hover:bg-gray-200 cursor-pointer rounded-sm"><i class="fa-solid fa-right-from-bracket"></i>&nbsp;Logout</a>
+                        </div>
                     </div>
-    
-                    <div class="popupUser hidden absolute mt-2 w-32 bg-white shadow-[0px_0px_5px_1px_#c2c2c2] p-2 rounded-md">
-                        <a href class="flex items-center p-1 hover:bg-gray-200 cursor-pointer rounded-sm"><i class="fa-solid fa-user"></i>&nbsp;Profile</a>
-                        <a href="../auth/logout.php" class="flex items-center p-1 hover:bg-gray-200 cursor-pointer rounded-sm"><i class="fa-solid fa-right-from-bracket"></i>&nbsp;Logout</a>
+        
+                    <a href="#" class="text-3xl">
+                        <i class="fa-regular fa-bell"></i>
+                    </a>
+                </div>
+            <?php } ?>
+
+            <?php if(!isset($_SESSION['user'])) { ?>
+                <div class="w-full flex justify-end">
+                    <div class="flex gap-3">
+                        <a href="../auth/login.php" class="bg-red-600 text-white py-1 px-4 rounded-md hover:bg-red-500">Sign in</a>
+                        <a href="../auth/register.php" class="bg-[#200E32] text-white py-1 px-4 rounded-md hover:bg-[#5f2f90]">Sign up</a>
                     </div>
                 </div>
-    
-                <a href="#" class="text-3xl">
-                    <i class="fa-regular fa-bell"></i>
-                </a>
-            </div>
-
-            <div class="flex gap-3">
-                <a href="../auth/login.php" class="bg-red-600 text-white py-1 px-4 rounded-md hover:bg-red-500">Sgin in</a>
-                <a href="../auth/register.php" class="bg-[#200E32] text-white py-1 px-4 rounded-md hover:bg-[#5f2f90]">Sgin up</a>
-            </div>
+            <?php } ?>
         </div>
     </div>
