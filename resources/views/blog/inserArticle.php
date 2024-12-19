@@ -23,9 +23,9 @@
 
         foreach($idCategory as $id) {
             mysqli_stmt_bind_param($insertTag, "ii", $idArticle['id'], $id);
-            if(mysqli_stmt_execute($insertTag)) {
-                header('location: blog.php');
-            }
+            mysqli_stmt_execute($insertTag);
         }
+
+        header('location: blog.php');
     }
 ?>
