@@ -5,7 +5,7 @@
 <div class="w-full py-3 px-6 md:px-4 fixed bottom-0 md:top-0 z-10 md:w-[70px] bg-white shadow-[0px_0px_2px_#9b9b9b]">
     <ul class="flex md:h-full gap-5 md:gap-8 justify-between md:flex-col md:justify-center md:items-center">
         <li>
-            <a href="../blog/blog.php" class="text-gray-500">
+            <a href="/resources/views/blog/blog.php" class="text-gray-500">
                 <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 24 24" id="home">
                     <path class="hover:fill-[#200E32] <?php if($page == '/resources/views/blog/blog.php') echo 'fill-[#200E32]' ?>" fill="#aba6a6" d="M6.64373233,18.7821107 L6.64373233,15.7152449 C6.64371685,14.9380902 7.27567036,14.3067075 8.05843544,14.3018198 L10.9326107,14.3018198 C11.7188748,14.3018198 12.3562677,14.9346318 12.3562677,15.7152449 L12.3562677,15.7152449 L12.3562677,18.7732212 C12.3562498,19.4472781 12.9040221,19.995083 13.5829406,20 L15.5438266,20 C16.4596364,20.0023291 17.3387522,19.6427941 17.9871692,19.0007051 C18.6355861,18.3586161 19,17.4867541 19,16.5775231 L19,7.86584638 C19,7.13138763 18.6720694,6.43471253 18.1046183,5.96350064 L11.4429783,0.674268354 C10.2785132,-0.250877524 8.61537279,-0.22099178 7.48539114,0.745384082 C7.48539114,0.745384082 0.967012253,5.96350064 0.967012253,5.96350064 C0.37274068,6.42082162 0.0175522924,7.11956262 0,7.86584638 L0,16.5686336 C0,18.463707 1.54738155,20 3.45617342,20 L5.37229029,20 C5.69917279,20.0023364 6.01348703,19.8750734 6.24547302,19.6464237 C6.477459,19.417774 6.60792577,19.1066525 6.60791706,18.7821107 L6.64373233,18.7821107 Z" transform="translate(2.5 2)"></path>
                 </svg>
@@ -15,8 +15,8 @@
 
         <?php if(isset($_SESSION['user']) && $_SESSION['user']['idRole'] == 1) { ?>
             <li>
-                <a href="#" class="text-gray-500">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-9 h-9 hover:fill-[#200E32]" height="24px" viewBox="0 -960 960 960" width="24px" fill="#aba6a6"><path d="M280-280h280v-80H280v80Zm0-160h400v-80H280v80Zm0-160h400v-80H280v80Zm-80 480q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v560q0 33-23.5 56.5T760-120H200Zm0-80h560v-560H200v560Zm0-560v560-560Z"/></svg>
+                <a href="../page_admin/articles/articles.php" class="text-gray-500">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-9 h-9 hover:fill-[#200E32] <?php if($page == '/resources/views/page_admin/articles/articles.php') echo 'fill-[#200E32]' ?>" height="24px" viewBox="0 -960 960 960" width="24px" fill="#aba6a6"><path d="M280-280h280v-80H280v80Zm0-160h400v-80H280v80Zm0-160h400v-80H280v80Zm-80 480q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v560q0 33-23.5 56.5T760-120H200Zm0-80h560v-560H200v560Zm0-560v560-560Z"/></svg>
                 </a>
             </li>
             <li>
