@@ -37,15 +37,15 @@
                             </span>
 
                             <div class="popupActions absolute hidden -right-2 mt-2 w-32 bg-white shadow-[0px_0px_5px_1px_#c2c2c2] p-1 rounded-md" data-id="<?php echo $article['id'] ?>">
-                                    <?php if($_SESSION['user']['id'] == $article['idUser']) { ?>
-                                        <a href="./blog.php?idArticle=<?php echo $article['id'] ?>" class="showFormEditArticle flex items-center text-sm p-1 hover:bg-gray-200 cursor-pointer rounded-sm">
-                                            <i class="fa-solid fa-pen-to-square"></i>&nbsp;Edit article
-                                        </a>
-                                    <?php } ?>
+                                <?php if($_SESSION['user']['id'] == $article['idUser']) { ?>
                                     <a href="./blog.php?idArticle=<?php echo $article['id'] ?>" class="showFormEditArticle flex items-center text-sm p-1 hover:bg-gray-200 cursor-pointer rounded-sm">
-                                        <i class="fa-solid fa-bug"></i>&nbsp;Report
+                                        <i class="fa-solid fa-pen-to-square"></i>&nbsp;Edit article
                                     </a>
-                                </div>
+                                <?php } ?>
+                                <a href="./blog.php?idArticle=<?php echo $article['id'] ?>" class="showFormEditArticle flex items-center text-sm p-1 hover:bg-gray-200 cursor-pointer rounded-sm">
+                                    <i class="fa-solid fa-bug"></i>&nbsp;Report
+                                </a>
+                            </div>
                         </div>
                     </div>
                     <div class="h-80 flex items-center justify-center bg-[#200E32]">
