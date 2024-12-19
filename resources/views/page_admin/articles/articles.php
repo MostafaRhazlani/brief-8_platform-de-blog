@@ -2,7 +2,7 @@
     require_once('../../../../isLogged/isOwner.php');
     require_once('../../../../connectdb/connectiondb.php');
 
-    $getArticles = mysqli_query($conn, "SELECT *, users.username FROM articles INNER JOIN users ON users.id = articles.idUser");
+    $getArticles = mysqli_query($conn, "SELECT articles.*, users.username FROM articles INNER JOIN users ON users.id = articles.idUser");
 ?>
 
 <?php include('../../layout/_HEAD.php') ?>

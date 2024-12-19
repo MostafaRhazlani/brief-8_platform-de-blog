@@ -3,14 +3,35 @@
     require_once('../../../../connectdb/connectiondb.php');
     //  check if the id exist in url and get it
     if(isset($_GET['idDeleteArticle'])) {
-        $getId = $_GET['idDeleteArticle'];
+        $getIdArticle = $_GET['idDeleteArticle'];
         echo "<script>
             document.addEventListener('DOMContentLoaded', () => {
                 const formDelete = document.querySelector('.formDelete');
                 formDelete.classList.remove('hidden');
             });
         </script>";
+
+        $getArticle = mysqli_query($conn, "SELECT id FROM articles WHERE id = $getIdArticle");
+        $resultArticle = mysqli_fetch_assoc($getArticle);
+        
     }
+
+    if(isset($_POST['idArticle'])) {
+        $idArticle = $_POST['idArticle'];
+
+        $deleteFromTags = mysqli_prepare($conn, "DELETE FROM tags WHERE idArticle = ?");
+        
+        mysqli_stmt_bind_param($deleteFromTags, 'i', $idArticle);
+        if(mysqli_stmt_execute($deleteFromTags)) {
+            
+            $deleteArticle = mysqli_prepare($conn, "DELETE FROM articles WHERE id = ?");
+            mysqli_stmt_bind_param($deleteArticle, 'i', $idArticle);
+            if(mysqli_stmt_execute($deleteArticle)) {
+                header('location: articles.php');
+            }
+        }
+    }
+
 ?>
 
 <div class="formDelete hidden w-full h-full absolute top-0 z-30 bg-gray-500 bg-opacity-75 flex justify-center items-center">
@@ -25,7 +46,7 @@
         
         <form action="./deleteArticle.php" method="post">
             
-            <input type="hidden" name="idContrat" value="<?php echo $resultgetContrat['id'] ?>">
+            <input type="hidden" name="idArticle" value="<?php echo $resultArticle['id'] ?>">
            
             <div class="mt-10 flex justify-evenly">
                 <button id="closeDelete" type="button" class="px-3 py-2 w-2/6 bg-red-600 text-white rounded-md hover:bg-red-400">No</button>
