@@ -2,7 +2,7 @@
 
     session_start();
     if(!isset($_SESSION['user'])) {
-        header('location:/resources/views/auth/login.php');
+        header('location:/resources/views/blog/blog.php');
     }
 
 
