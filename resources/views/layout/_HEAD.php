@@ -27,7 +27,7 @@
                                     </span>
                                 </div>
                             </div>
-                            <img width="60" class="rounded-full" src="../../img/photo youcode.jpg" alt="">
+                            <img width="60" class="rounded-full" src="/resources/img/photo youcode.jpg" alt="">
                         </div>
         
                         <div class="popupUser hidden absolute mt-2 w-32 bg-white shadow-[0px_0px_5px_1px_#c2c2c2] p-2 rounded-md">
