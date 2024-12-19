@@ -10,10 +10,12 @@
 
 <div class="md:pl-20 w-full h-screen pt-28 p-3">
     <div class="mb-3 flex flex-col md:flex-row justify-between">
-        <div class="flex flex-col-reverse md:flex-row mb-5 md:mb-0">
-            <button class="py-2 px-4 bg-red-600 rounded-md hover:bg-red-500 text-white md:mr-3 mt-2 md:mt-0"><i class="fa-solid fa-circle-plus"></i> Add Category</button>
-            <input class="border-2 border-red-600 rounded-md py-2 px-4" type="text" placeholder="Enter category" name="category">
-        </div>
+        <form action="./insertCategory.php" method="post">
+            <div class="flex flex-col md:flex-row-reverse mb-5 md:mb-0">
+                <input class="border-2 border-red-600 rounded-md py-2 px-4" type="text" placeholder="Enter category" name="category">
+                <button class="py-2 px-4 bg-red-600 rounded-md hover:bg-red-500 text-white md:mr-3 mt-2 md:mt-0"><i class="fa-solid fa-circle-plus"></i> Add Category</button>
+            </div>
+        </form>
         <button class="py-2 px-4 bg-red-600 rounded-md hover:bg-red-500 text-white"><i class="fa-solid fa-arrow-down-a-z"></i> Sort Categories</button>
     </div>
     <div class="w-full h-5/6 shadow-[0px_0px_4px_#c9c9c9] rounded-md">
