@@ -1,9 +1,6 @@
 const showFormArticle = document.querySelector('.showFormArticle');
 const formArticle = document.querySelector('.formArticle');
 
-const showFormEditArticle = document.querySelectorAll('.showFormEditArticle');
-const formEditArticle = document.querySelector('.formEditArticle');
-
 const showInputImage = document.querySelectorAll('.showInputImage');
 const inputImage = document.querySelectorAll('.inputImage');
 
@@ -22,16 +19,6 @@ const closeFrom = document.querySelectorAll('.colseForm');
 showFormArticle.addEventListener('click', () => {
     formArticle.classList.remove('hidden');
 });
-
-// show form edit article
-showFormEditArticle.forEach(show => {
-    show.addEventListener('click', () => {
-        formEditArticle.classList.remove('hidden');
-        popupActions.forEach(popup => {
-            popup.classList.add('hidden')
-        })
-    });
-})
 
 // show input upload image in form article
 showInputImage.forEach((show, i) => {
@@ -74,6 +61,6 @@ showActions.forEach(show => {
 closeFrom.forEach(close => {
     close.addEventListener('click', () => {
         formArticle.classList.add('hidden');
-        formEditArticle.classList.add('hidden');
+        window.location.href = "/resources/views/blog/blog.php"
     })
 })
