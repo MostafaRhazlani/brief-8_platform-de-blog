@@ -3,9 +3,11 @@
     require_once('../../../connectdb/connectiondb.php'); 
 
     $getCategories = mysqli_query($conn, "SELECT * FROM categories");
-
     $getArticles = mysqli_query($conn,"SELECT articles.*, users.username, users.email FROM articles inner join users on users.id = articles.idUser ORDER BY id DESC");
     
+    $idUser = isset($_SESSION['idUser']) ? $_SESSION['idUser'] : 0;
+    $getLikes = mysqli_query($conn, "SELECT * FROM likes WHERE idUser = $idUser");
+    $userLike = mysqli_num_rows($getLikes);
 ?>
 
 <?php include('../layout/_HEAD.php') ?>
@@ -86,9 +88,15 @@
                                             $_SESSION['idArticle'] = $article['id'];
                                             $_SESSION['idUser'] = $_SESSION['user']['id'];
                                         ?>
-                                        <button class="hover:scale-110 transition duration-300 ease-in-out">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="30px" height="30px" viewBox="0 -960 960 960" fill="#cf4c4c"><path d="M440-501Zm0 381L313-234q-72-65-123.5-116t-85-96q-33.5-45-49-87T40-621q0-94 63-156.5T260-840q52 0 99 22t81 62q34-40 81-62t99-22q81 0 136 45.5T831-680h-85q-18-40-53-60t-73-20q-51 0-88 27.5T463-660h-46q-31-45-70.5-72.5T260-760q-57 0-98.5 39.5T120-621q0 33 14 67t50 78.5q36 44.5 98 104T440-228q26-23 61-53t56-50l9 9 19.5 19.5L605-283l9 9q-22 20-56 49.5T498-172l-58 52Zm280-160v-120H600v-80h120v-120h80v120h120v80H800v120h-80Z"/></svg>
-                                        </button>
+                                        <?php if($userLike == 0) { ?>
+                                            <button class="hover:scale-110 transition duration-300 ease-in-out">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="30px" height="30px" viewBox="0 -960 960 960" fill="#cf4c4c"><path d="M440-501Zm0 381L313-234q-72-65-123.5-116t-85-96q-33.5-45-49-87T40-621q0-94 63-156.5T260-840q52 0 99 22t81 62q34-40 81-62t99-22q81 0 136 45.5T831-680h-85q-18-40-53-60t-73-20q-51 0-88 27.5T463-660h-46q-31-45-70.5-72.5T260-760q-57 0-98.5 39.5T120-621q0 33 14 67t50 78.5q36 44.5 98 104T440-228q26-23 61-53t56-50l9 9 19.5 19.5L605-283l9 9q-22 20-56 49.5T498-172l-58 52Zm280-160v-120H600v-80h120v-120h80v120h120v80H800v120h-80Z"/></svg>
+                                            </button>
+                                        <?php } else { ?>
+                                            <button class="hover:scale-110 transition duration-300 ease-in-out">
+                                                <svg xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="0 -960 960 960" width="30px" fill="#cf4c4c"><path d="m480-120-58-52q-101-91-167-157T150-447.5Q111-500 95.5-544T80-634q0-94 63-157t157-63q52 0 99 22t81 62q34-40 81-62t99-22q94 0 157 63t63 157q0 46-15.5 90T810-447.5Q771-395 705-329T538-172l-58 52Zm0-108q96-86 158-147.5t98-107q36-45.5 50-81t14-70.5q0-60-40-100t-100-40q-47 0-87 26.5T518-680h-76q-15-41-55-67.5T300-774q-60 0-100 40t-40 100q0 35 14 70.5t50 81q36 45.5 98 107T480-228Zm0-273Z"/></svg>
+                                            </button>
+                                        <?php } ?>
                                     </form>
                                 <?php } else { ?>
                                     <a href="../auth/login.php" class="hover:scale-110 transition duration-300 ease-in-out cursor-pointer">
