@@ -30,8 +30,8 @@
                 </a>
             </li>
             <li>
-                <a href="../page_admin/dashboard.php" class="text-gray-500">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-9 h-9 hover:fill-[#200E32]" height="24px" viewBox="0 -960 960 960" width="24px" fill="#aba6a6"><path d="M80-120v-80h800v80H80Zm40-120v-280h120v280H120Zm200 0v-480h120v480H320Zm200 0v-360h120v360H520Zm200 0v-600h120v600H720Z"/></svg>
+                <a href="/resources/views/page_admin/dashboard.php" class="text-gray-500">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-9 h-9 hover:fill-[#200E32] <?php if($page == '/resources/views/page_admin/dashboard.php') echo 'fill-[#200E32]' ?>" height="24px" viewBox="0 -960 960 960" width="24px" fill="#aba6a6"><path d="M80-120v-80h800v80H80Zm40-120v-280h120v280H120Zm200 0v-480h120v480H320Zm200 0v-360h120v360H520Zm200 0v-600h120v600H720Z"/></svg>
                 </a>
             </li>
         <?php } else { ?>
