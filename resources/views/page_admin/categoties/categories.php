@@ -39,10 +39,10 @@
                                         <td class="px-4 py-4"><?php echo $index +=1 ?></td>
                                         <td class="px-4 py-4"><?php echo $category['nameCategory'] ?></td>
                                         <td class="px-4 py-4 min-w-52">
-                                            <a href="#" class="showFormDelete bg-red-700 rounded-full px-2 py-1 text-white text-[13px] mr-2 hover:bg-red-500 cursor-pointer">
+                                            <a href="./categories.php?idDeleteCategory=<?php echo $category['id'] ?>" class="bg-red-700 rounded-full px-2 py-1 text-white text-[13px] mr-2 hover:bg-red-500 cursor-pointer">
                                                 <i class="fa-regular fa-trash-can"></i>&nbsp;Delete
                                             </a>
-                                            <a href="#" class="showFormDelete bg-[#301f41] rounded-full px-3 py-1 text-white text-[13px] hover:bg-[#462468] cursor-pointer">
+                                            <a href="#" class="bg-[#301f41] rounded-full px-3 py-1 text-white text-[13px] hover:bg-[#462468] cursor-pointer">
                                                 <i class="fa-solid fa-pen-to-square"></i>&nbsp;Edit
                                             </a>
                                         </td>
@@ -53,10 +53,10 @@
                     </table>
                 </div>
             </div>
-
         </div>
-    
     </div>
 </div>
+
+<?php include('./deleteCategory.php') ?>
 
 <?php include('../../layout/_FOOTER.php') ?>
