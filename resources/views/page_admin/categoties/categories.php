@@ -26,8 +26,8 @@
                         <thead>
                             <tr>
                                 <th class="p-4 text-start">ID</th>
-                                <th class="p-4 text-start">Name Category</th>
-                                <th class="p-4 text-start">Actions</th>
+                                <th class="p-4 text-center">Name Category</th>
+                                <th class="p-4 text-center">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -37,14 +37,19 @@
                                     while($category = mysqli_fetch_assoc($getCategories)) { ?>
                                     <tr class="border-b-[0.2px] text-start hover:bg-gray-100">
                                         <td class="px-4 py-4"><?php echo $index +=1 ?></td>
-                                        <td class="px-4 py-4"><?php echo $category['nameCategory'] ?></td>
-                                        <td class="px-4 py-4 min-w-52">
+                                        <td class="text-center px-4 py-4"><?php echo $category['nameCategory'] ?></td>
+                                        <td class="px-4 py-4 min-w-96 flex items-center justify-center">
                                             <a href="./categories.php?idDeleteCategory=<?php echo $category['id'] ?>" class="bg-red-700 rounded-full px-2 py-1 text-white text-[13px] mr-2 hover:bg-red-500 cursor-pointer">
                                                 <i class="fa-regular fa-trash-can"></i>&nbsp;Delete
                                             </a>
-                                            <a href="#" class="bg-[#301f41] rounded-full px-3 py-1 text-white text-[13px] hover:bg-[#462468] cursor-pointer">
-                                                <i class="fa-solid fa-pen-to-square"></i>&nbsp;Edit
-                                            </a>
+                                            <form action="./editCategory.php" method="post">
+                                                <button type="submit" class="bg-[#301f41] rounded-full px-3 py-1 text-white text-[13px] hover:bg-[#462468] cursor-pointer">
+                                                    <i class="fa-solid fa-pen-to-square"></i>&nbsp;Edit
+                                                </button>
+
+                                                <input type="hidden" name="idCategory" value="<?php echo $category['id'] ?>">
+                                                <input class="bg-gray-200 py-1 px-2 ml-2 rounded-md outline-none focus:bg-gray-400" value="<?php echo $category['nameCategory'] ?>" type="text" name="nameCategory" placeholder="Change name category">
+                                            </form>
                                         </td>
                                     </tr>
                                 <?php } ?>
