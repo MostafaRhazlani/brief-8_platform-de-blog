@@ -20,12 +20,10 @@
                 <div class="flex items-center gap-4">
                     <div class="relative">
                         <div class="cursor-pointer hover:opacity-60 showPopupUser">
-                            <div class="absolute w-5 h-5 bottom-0 bg-white rounded-full">
-                                <div class="flex justify-center items-center">
-                                    <span class="text-sm font-bold text-gray-500">
-                                        <i class="fa-solid fa-circle-chevron-down"></i>
-                                    </span>
-                                </div>
+                            <div class="flex justify-center items-center absolute w-5 h-5 bottom-0 bg-white rounded-full">
+                                <span class="text-sm font-bold text-gray-500">
+                                    <i class="fa-solid fa-circle-chevron-down"></i>
+                                </span>
                             </div>
                             <img width="60" class="rounded-full" src="/resources/img/photo youcode.jpg" alt="">
                         </div>
