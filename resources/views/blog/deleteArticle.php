@@ -1,6 +1,6 @@
 <?php
-    if(isset($_SESSION['user'])) {
-        require_once('../../../connectdb/connectiondb.php');
+    require_once('../../../connectdb/connectiondb.php');
+
         //  check if the id exist in url and get it
         if(isset($_GET['idDeleteArticle'])) {
             $getIdArticle = $_GET['idDeleteArticle'];
@@ -31,11 +31,10 @@
                 }
             }
         }
-    }
 
 ?>
 
-<div class="formDelete hidden w-full h-full absolute top-0 z-30 bg-gray-500 bg-opacity-75 flex justify-center items-center">
+<div class="formDelete hidden w-full h-screen fixed top-0 z-30 bg-gray-500 bg-opacity-75 flex justify-center items-center">
     <div class="w-4/5 md:1/5 lg:w-1/4 bg-white p-5 top-20 rounded-md text-center">
         <div class="w-full flex justify-center mb-10 mt-5">
             <div class="w-28 h-28 rounded-full border-[4px] border-yellow-500 flex justify-center items-center">

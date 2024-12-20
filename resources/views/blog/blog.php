@@ -50,7 +50,7 @@
                                         <i class="fa-solid fa-trash-can"></i>&nbsp;Delete article
                                     </a>
                                 <?php } else { ?>
-                                    <a href="./blog.php?idArticle=<?php echo $article['id'] ?>" class="showFormEditArticle flex items-center text-sm p-1 hover:bg-gray-200 cursor-pointer rounded-sm">
+                                    <a href="#" class="showFormEditArticle flex items-center text-sm p-1 hover:bg-gray-200 cursor-pointer rounded-sm">
                                         <i class="fa-solid fa-bug"></i>&nbsp;Report
                                     </a>
                                 <?php } ?>
