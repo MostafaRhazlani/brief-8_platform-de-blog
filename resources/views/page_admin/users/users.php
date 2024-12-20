@@ -21,12 +21,10 @@
 
 <div class="md:pl-20 w-full h-screen pt-28 p-3">
     <div class="mb-3 flex flex-col md:flex-row">
-        <div>
-            <button class="py-2 px-4 bg-red-600 rounded-md hover:bg-red-500 text-white mb-6 md:mb-0 md:mr-6"><i class="fa-solid fa-arrow-down-a-z"></i> Sort Categories</button>
-        </div>
+        <button class=" py-2 px-4 bg-red-600 rounded-md hover:bg-red-500 text-white mb-6 md:mb-0 md:mr-6"><i class="fa-solid fa-arrow-down-a-z"></i> Sort Categories</button>
 
-        <div class="formEditRole hidden">
         <form class="mb-0" action="./updateRole.php" method="post">
+            <div class="formEditRole hidden flex flex-col md:flex-row">
                 <input type="hidden" name="idUser" value="<?php if(isset($_GET['idUser'])) echo $_GET['idUser'] ?>">
                 <select class="border-2 border-red-600 rounded-md py-2 px-4" name="idRole">
                     <?php while($role = mysqli_fetch_assoc($getRoles)) { ?>
@@ -34,8 +32,8 @@
                     <?php } ?>
                 </select>
                 <button type="submit" class="py-2 px-4 bg-red-600 rounded-md hover:bg-red-500 text-white md:ml-2 mt-2 md:mt-0"> Change Role</button>
-            </form>
-        </div>
+            </div>
+        </form>
     </div>
     <div class="w-full h-5/6 shadow-[0px_0px_4px_#c9c9c9] rounded-md">
         <div class="p-4 w-full h-full overflow-scroll" style="scrollbar-width: none">
@@ -65,7 +63,7 @@
                                     </a>
                                 </td>
                                 <td class="px-4 py-4 min-w-32 text-center">
-                                    <a href="#" class="showFormDelete bg-red-700 rounded-full px-2 py-1 text-white text-[13px] mr-2 hover:bg-red-500 cursor-pointer">
+                                    <a href="./users.php?idDeleteUser=<?php echo $user['id'] ?>" class="showFormDelete bg-red-700 rounded-full px-2 py-1 text-white text-[13px] mr-2 hover:bg-red-500 cursor-pointer">
                                         <i class="fa-regular fa-trash-can"></i>&nbsp;Delete
                                     </a>
                                 </td>
@@ -77,5 +75,7 @@
         </div>
     </div>
 </div>
+
+<?php require('./deleteUser.php') ?>
 
 <?php include('../../layout/_FOOTER.php') ?>
