@@ -1,5 +1,9 @@
 <?php 
     session_start();
+
+    if(!isset($_SESSION['user'])) {
+        header('location: ../auth/login.php');
+    }
     require_once('../../../connectdb/connectiondb.php');  
     
     $idArticle = isset($_GET['idArticle']) ? $_GET['idArticle'] : 0;
@@ -9,7 +13,7 @@
     $getArticles = mysqli_query($conn,"SELECT articles.*, users.username, users.email FROM articles inner join users on users.id = articles.idUser WHERE articles.id = $idArticle");
     $resultArticle = mysqli_fetch_assoc($getArticles);
 
-    $getComments = mysqli_query($conn, "SELECT comments.*, email, username FROM comments JOIN users ON users.id = comments.idUser WHERE idArticle = $idArticle");
+    $getComments = mysqli_query($conn, "SELECT comments.*, email, username, idRole FROM comments JOIN users ON users.id = comments.idUser WHERE idArticle = $idArticle ORDER BY id DESC");
 ?>
 
 <?php include('../layout/_HEAD.php') ?>
@@ -140,9 +144,9 @@
                                         <div class="mr-2 mt-1">
                                             <img width="40" src="../../img/149071.png" alt="">
                                         </div>
-                                        <div class="p-2 rounded-lg <?php echo ($comment['idUser'] == $_SESSION['user']['id']) ? 'bg-[#553674] text-white' : 'bg-white' ?>">
-                                            <div class="text-[14px] mb-2">
-                                                <p><?php echo $comment['username'] ?></p>
+                                        <div class="p-2 rounded-lg <?php echo ($comment['idUser'] == $_SESSION['user']['id']) ? 'bg-[#553674] text-white' : 'bg-white'?> <?php if($comment['idRole'] == 1) echo ' bg-yellow-400 border-2 border-yellow-700' ?>">
+                                            <div class="text-[14px] mb-2 flex justify-between items-center gap-5">
+                                                <p><?php echo ($comment['username'] == $_SESSION['user']['username']) ? 'You' : $comment['username'] ?></p>
                                             </div>
                                             <div>
                                                 <p><?php echo $comment['content'] ?></p>
@@ -162,9 +166,11 @@
                             <?php } ?>
                         <?php } ?>
                     </div>
-                    <form action="" class="w-full">
+                    <form action="./insertComment.php" method="post" class="w-full">
                         <div class="flex flex-col items-end rounded-md overflow-hidden bg-gray-300">
-                            <textarea name="" class="outline-none w-full p-2 bg-inherit hideScrollbar" style="resize: none"></textarea>
+                            <input type="hidden" name="idUser" value="<?php echo $_SESSION['user']['id'] ?>">
+                            <input type="hidden" name="idArticle" value="<?php echo $idArticle ?>">
+                            <textarea name="content" class="outline-none w-full p-2 bg-inherit hideScrollbar" style="resize: none"></textarea>
                             <button class="p-2">
                                 <svg xmlns="http://www.w3.org/2000/svg" height="32px" viewBox="0 -960 960 960" class="hover:fill-red-600" width="32px" fill="#434343">
                                     <path d="M120-160v-640l760 320-760 320Zm80-120 474-200-474-200v140l240 60-240 60v140Zm0 0v-400 400Z"/>
