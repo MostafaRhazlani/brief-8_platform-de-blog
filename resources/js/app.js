@@ -1,4 +1,4 @@
-const showFormArticle = document.querySelector('.showFormArticle');
+const showFormArticle = document.querySelectorAll('.showFormArticle');
 const formArticle = document.querySelector('.formArticle');
 
 const showInputImage = document.querySelectorAll('.showInputImage');
@@ -7,7 +7,7 @@ const inputImage = document.querySelectorAll('.inputImage');
 const showInputTags = document.querySelectorAll('.showInputTags');
 const inputTags = document.querySelectorAll('.inputTags');
 
-const showPopupUser = document.querySelector('.showPopupUser');
+const showPopupUser = document.querySelectorAll('.showPopupUser');
 const popupUser = document.querySelector('.popupUser');
 
 const showActions = document.querySelectorAll('.showActions');
@@ -16,9 +16,11 @@ const popupActions = document.querySelectorAll('.popupActions');
 const closeFrom = document.querySelectorAll('.colseForm');
 
 // show form article
-showFormArticle.addEventListener('click', () => {
-    formArticle.classList.remove('hidden');
-});
+showFormArticle.forEach(show => {
+    show.addEventListener('click', () => {
+        formArticle.classList.remove('hidden');
+    })
+})
 
 // show input upload image in form article
 showInputImage.forEach((show, i) => {
@@ -36,8 +38,14 @@ showInputTags.forEach((show, i) => {
 })
 
 // show pop up in image user
-showPopupUser.addEventListener('click', () => {
-    popupUser.classList.toggle('hidden')
+// showPopupUser.addEventListener('click', () => {
+//     
+// })
+
+showPopupUser.forEach(show => {
+    show.addEventListener('click', () => {
+        popupUser.classList.toggle('hidden')
+    })
 })
 
 // show form actions
