@@ -82,9 +82,9 @@
                         <div class="flex justify-between border-b-2 border-t-2 py-2">
                             <div class="flex gap-5">
                                 <div class="flex items-center">
-                                    <a href="#" class="mr-1">
+                                    <span class="mr-1">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="#cf4c4c" viewBox="0 0 512 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M47.6 300.4L228.3 469.1c7.5 7 17.4 10.9 27.7 10.9s20.2-3.9 27.7-10.9L464.4 300.4c30.4-28.3 47.6-68 47.6-109.5v-5.8c0-69.9-50.5-129.5-119.4-141C347 36.5 300.6 51.4 268 84L256 96 244 84c-32.6-32.6-79-47.5-124.6-39.9C50.5 55.6 0 115.2 0 185.1v5.8c0 41.5 17.2 81.2 47.6 109.5z"/></svg>
-                                    </a>
+                                    </span>
                                     <!-- count total likes -->
                                     <?php
                                         $getAllLikes = mysqli_query($conn, "SELECT * FROM likes WHERE idArticle = $idArticle");
@@ -94,10 +94,14 @@
                                 </div>
                                 <div class="flex items-center">
                                     <!-- icon comments -->
-                                    <a href="#" class="mr-1">
+                                    <span class="mr-1">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewBox="0 -960 960 960" fill="#6d6972"><path d="M880-80 720-240H320q-33 0-56.5-23.5T240-320v-40h440q33 0 56.5-23.5T760-440v-280h40q33 0 56.5 23.5T880-640v560ZM160-473l47-47h393v-280H160v327ZM80-280v-520q0-33 23.5-56.5T160-880h440q33 0 56.5 23.5T680-800v280q0 33-23.5 56.5T600-440H240L80-280Zm80-240v-280 280Z"/></svg>
-                                    </a>
-                                    0 comment
+                                    </span>
+                                    <?php
+                                        $getAllComments = mysqli_query($conn, "SELECT * FROM comments WHERE idArticle = $idArticle");
+                                        $totalComments = mysqli_num_rows($getAllComments);
+                                        echo "$totalComments comment";
+                                    ?>
                                 </div>
                             </div>
                             <!-- icon views -->
