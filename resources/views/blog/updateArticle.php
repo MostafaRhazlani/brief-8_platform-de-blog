@@ -4,8 +4,8 @@
 
     // get all names in input
 
-    if(isset($_SESSION['idArticle'])) {
-        $idArticle = $_SESSION['idArticle'];
+    if(isset($_POST['idArticle'])) {
+        $idArticle = $_POST['idArticle'];
         $title = isset($_POST['title']) ? $_POST['title'] : '';
         $content = isset($_POST['content']) ? $_POST['content'] : '';
         $idCategory = isset($_POST['idCategory']) ? $_POST['idCategory'] : [];

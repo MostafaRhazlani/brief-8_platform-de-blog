@@ -11,7 +11,7 @@
             });
         </script>";
 
-        $getArticle = mysqli_query($conn, "SELECT tags.*, articles.* FROM tags INNER JOIN articles ON articles.id = tags.idArticle WHERE articles.id = $idArticle");
+        $getArticle = mysqli_query($conn, "SELECT * FROM articles WHERE id = $idArticle");
         $resultArticle = mysqli_fetch_assoc($getArticle);
     
         $getCategories = mysqli_query($conn, "SELECT * FROM categories");
@@ -40,7 +40,7 @@
             <div class="w-full">
                 <?php if($resultArticle) { ?>
                     <div class="flex flex-col mb-4">
-                        <?php $_SESSION['idArticle'] = $resultArticle['id'];?>
+                        <input type="hidden" name="idArticle" value="<?php echo $resultArticle['id'] ?>">
                         <label for="title">Title</label>
                         <input type="text" id="title" name="title" value="<?php echo $resultArticle['title'] ?>" placeholder="Enter title here" class="w-full p-1 mt-1 rounded-md border-2 border-red-600">
                     </div>
@@ -78,7 +78,7 @@
             </div>
 
             <div class="w-full">
-                <button class="p-2 w-full bg-red-600 rounded-md text-white mt-6 hover:bg-red-500" type="submit">add article</button>
+                <button class="p-2 w-full bg-red-600 rounded-md text-white mt-6 hover:bg-red-500" type="submit">Update article</button>
             </div>
         </form>
     </div>
