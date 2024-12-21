@@ -136,21 +136,33 @@
                     </div>
                 </div>
                 <div class="rounded-md bg-gray-200 h-96 p-3 mb-16 md:mb-0 flex flex-col justify-between">
-                    <div class="overflow-scroll hideScrollbar mb-2">
+                    <div class="overflow-y-scroll hideScrollbar mb-2">
                         <?php if($getComments) { ?>
                             <?php while($comment = mysqli_fetch_assoc($getComments)) { ?>
                                 <div class="flex flex-col mb-5">
-                                    <div class="w-full flex">
-                                        <div class="mr-2 mt-1">
-                                            <img width="40" src="../../img/149071.png" alt="">
-                                        </div>
+                                    <div class="flex items-start">
+                                        <!-- image owner comment -->
+                                        <img class="mr-2 mt-1" width="40px" height="40" src="../../img/149071.png" alt="">
+
                                         <div class="p-2 rounded-lg <?php echo ($comment['idUser'] == $_SESSION['user']['id']) ? 'bg-[#553674] text-white' : 'bg-white'?> <?php if($comment['idRole'] == 1) echo ' bg-yellow-400 border-2 border-yellow-700' ?>">
-                                            <div class="text-[14px] mb-2 flex justify-between items-center gap-5">
+                                            <div class="text-[14px] mb-2 flex justify-between items-center gap-8">
                                                 <p><?php echo ($comment['username'] == $_SESSION['user']['username']) ? 'You' : $comment['username'] ?></p>
+                                                
+                                                <div class="relative">
+                                                    <span class="showActions text-lg cursor-pointer" data-id="<?php echo $comment['id'] ?>">
+                                                        <i class="fa-solid fa-ellipsis"></i>
+                                                    </span>
+
+                                                    <?php if($_SESSION['user']['id'] == $comment['idUser'] || $_SESSION['user']['id'] == $resultArticle['idUser']) { ?>
+                                                        <div class="popupActions absolute hidden top-6 -right-2 bg-white shadow-[0px_0px_5px_1px_#c2c2c2] p-1 rounded-sm" data-id="<?php echo $comment['id'] ?>">
+                                                            <a href="./detailsArticle.php?idArticle=<?php echo $idArticle ?>&idComment=<?php echo $comment['id'] ?>" class="flex items-center text-sm text-black w-32 p-1 hover:bg-gray-200 cursor-pointer rounded-sm">
+                                                                <i class="fa-solid fa-trash-can"></i>&nbsp;Delete comment
+                                                            </a>
+                                                        </div>
+                                                    <?php } ?>
+                                                </div>
                                             </div>
-                                            <div>
-                                                <p><?php echo $comment['content'] ?></p>
-                                            </div>
+                                            <p class="break-all"><?php echo $comment['content'] ?></p>
                                         </div>
                                     </div>
                                     <div class="ml-14 flex text-[12px] gap-3 mt-1 text-gray-600">
@@ -184,5 +196,7 @@
         </div>
     </div>
 </div>
+
+<?php require('./deleteComment.php') ?>
 
 <?php include('../layout/_FOOTER.php') ?>
