@@ -1,9 +1,5 @@
 <?php 
     session_start();
-
-    if(!isset($_SESSION['user'])) {
-        header('location: ../auth/login.php');
-    }
     require_once('../../../connectdb/connectiondb.php');  
     
     $idArticle = isset($_GET['idArticle']) ? $_GET['idArticle'] : 0;
@@ -32,17 +28,19 @@
                             <p class="text-gray-500 text-sm"><?php echo $resultArticle['email'] ?></p>
                         </div>
                     </div>
-                    <div class="relative">
-                        <span class="showActions text-2xl cursor-pointer hover:text-red-600" data-id="">
-                            <i class="fa-solid fa-ellipsis-vertical"></i>
-                        </span>
+                    <?php if(isset($_SESSION['user'])) { ?>
+                        <div class="relative">
+                            <span class="showActions text-2xl cursor-pointer hover:text-red-600" data-id="">
+                                <i class="fa-solid fa-ellipsis-vertical"></i>
+                            </span>
 
-                        <div class="popupActions absolute hidden -right-2 mt-2 w-32 bg-white shadow-[0px_0px_5px_1px_#c2c2c2] p-1 rounded-sm" data-id="">
-                            <a href="#" class="showFormEditArticle flex items-center text-sm p-1 hover:bg-gray-200 cursor-pointer rounded-sm">
-                                <i class="fa-solid fa-bug"></i>&nbsp;Report
-                            </a>
+                            <div class="popupActions absolute hidden -right-2 mt-2 w-32 bg-white shadow-[0px_0px_5px_1px_#c2c2c2] p-1 rounded-sm" data-id="">
+                                <a href="#" class="showFormEditArticle flex items-center text-sm p-1 hover:bg-gray-200 cursor-pointer rounded-sm">
+                                    <i class="fa-solid fa-bug"></i>&nbsp;Report
+                                </a>
+                            </div>
                         </div>
-                    </div>
+                    <?php } ?>
                 </div>
                 
                 <div class="mt-6">
@@ -144,23 +142,28 @@
                                         <!-- image owner comment -->
                                         <img class="mr-2 mt-1" width="40px" height="40" src="../../img/149071.png" alt="">
 
-                                        <div class="p-2 rounded-lg <?php echo ($comment['idUser'] == $_SESSION['user']['id']) ? 'bg-[#553674] text-white' : 'bg-white'?> <?php if($comment['idRole'] == 1) echo ' bg-yellow-400 border-2 border-yellow-700' ?>">
+                                        <div class="p-2 rounded-lg <?php echo (isset($_SESSION['user']) && $comment['idUser'] == $_SESSION['user']['id']) ? 'bg-[#553674] text-white' : 'bg-white'?> <?php if($comment['idRole'] == 1) echo ' bg-yellow-400 border-2 border-yellow-700' ?>">
                                             <div class="text-[14px] mb-2 flex justify-between items-center gap-8">
-                                                <p><?php echo ($comment['username'] == $_SESSION['user']['username']) ? 'You' : $comment['username'] ?></p>
+                                                <p><?php echo (isset($_SESSION['user']) && $comment['username'] == $_SESSION['user']['username']) ? 'You' : $comment['username'] ?></p>
                                                 
-                                                <div class="relative">
-                                                    <span class="showActions text-lg cursor-pointer" data-id="<?php echo $comment['id'] ?>">
-                                                        <i class="fa-solid fa-ellipsis"></i>
-                                                    </span>
+                                                <?php if(isset($_SESSION['user'])) { ?>
+                                                    <div class="relative">
+                                                        <span class="showActions text-lg cursor-pointer" data-id="<?php echo $comment['id'] ?>">
+                                                            <i class="fa-solid fa-ellipsis"></i>
+                                                        </span>
 
-                                                    <?php if($_SESSION['user']['id'] == $comment['idUser'] || $_SESSION['user']['id'] == $resultArticle['idUser']) { ?>
-                                                        <div class="popupActions absolute hidden top-6 -right-2 bg-white shadow-[0px_0px_5px_1px_#c2c2c2] p-1 rounded-sm" data-id="<?php echo $comment['id'] ?>">
-                                                            <a href="./detailsArticle.php?idArticle=<?php echo $idArticle ?>&idComment=<?php echo $comment['id'] ?>" class="flex items-center text-sm text-black w-32 p-1 hover:bg-gray-200 cursor-pointer rounded-sm">
-                                                                <i class="fa-solid fa-trash-can"></i>&nbsp;Delete comment
-                                                            </a>
-                                                        </div>
-                                                    <?php } ?>
-                                                </div>
+                                                        <?php if(isset($_SESSION['user']) && $_SESSION['user']['id'] == $comment['idUser'] || isset($_SESSION['user']) && $_SESSION['user']['id'] == $resultArticle['idUser']) { ?>
+                                                            <div class="popupActions absolute hidden top-6 -right-2 bg-white shadow-[0px_0px_5px_1px_#c2c2c2] p-1 rounded-sm" data-id="<?php echo $comment['id'] ?>">
+                                                                <a href="./detailsArticle.php?idArticle=<?php echo $idArticle ?>&idEditComment=<?php echo $comment['id'] ?>" class="flex items-center text-sm text-black w-32 p-1 hover:bg-gray-200 cursor-pointer rounded-sm <?php if(isset($_SESSION['user']) && $_SESSION['user']['id'] == $resultArticle['idUser']) echo 'hidden' ?>">
+                                                                    <i class="fa-solid fa-pen-to-square"></i>&nbsp;Edit comment
+                                                                </a>
+                                                                <a href="./detailsArticle.php?idArticle=<?php echo $idArticle ?>&idComment=<?php echo $comment['id'] ?>" class="flex items-center text-sm text-red-600 w-32 p-1 hover:bg-red-200 cursor-pointer rounded-sm">
+                                                                    <i class="fa-solid fa-trash-can"></i>&nbsp;Delete comment
+                                                                </a>
+                                                            </div>
+                                                        <?php } ?>
+                                                    </div>
+                                                <?php } ?>
                                             </div>
                                             <p class="break-all"><?php echo $comment['content'] ?></p>
                                         </div>
@@ -178,18 +181,20 @@
                             <?php } ?>
                         <?php } ?>
                     </div>
-                    <form action="./insertComment.php" method="post" class="w-full">
-                        <div class="flex flex-col items-end rounded-md overflow-hidden bg-gray-300">
-                            <input type="hidden" name="idUser" value="<?php echo $_SESSION['user']['id'] ?>">
-                            <input type="hidden" name="idArticle" value="<?php echo $idArticle ?>">
-                            <textarea name="content" class="outline-none w-full p-2 bg-inherit hideScrollbar" style="resize: none"></textarea>
-                            <button class="p-2">
-                                <svg xmlns="http://www.w3.org/2000/svg" height="32px" viewBox="0 -960 960 960" class="hover:fill-red-600" width="32px" fill="#434343">
-                                    <path d="M120-160v-640l760 320-760 320Zm80-120 474-200-474-200v140l240 60-240 60v140Zm0 0v-400 400Z"/>
-                                </svg>
-                            </button>
-                        </div>
-                    </form>
+                    <?php if(isset($_SESSION['user'])) { ?>
+                        <form action="./insertComment.php" method="post" class="w-full">
+                            <div class="flex flex-col items-end rounded-md overflow-hidden bg-gray-300">
+                                <input type="hidden" name="idUser" value="<?php echo $_SESSION['user']['id'] ?>">
+                                <input type="hidden" name="idArticle" value="<?php echo $idArticle ?>">
+                                <textarea name="content" class="outline-none w-full p-2 bg-inherit hideScrollbar" style="resize: none"></textarea>
+                                <button class="p-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" height="32px" viewBox="0 -960 960 960" class="hover:fill-red-600" width="32px" fill="#434343">
+                                        <path d="M120-160v-640l760 320-760 320Zm80-120 474-200-474-200v140l240 60-240 60v140Zm0 0v-400 400Z"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </form>
+                    <?php } ?>
                 </div>
 
             </div>
@@ -198,5 +203,6 @@
 </div>
 
 <?php require('./deleteComment.php') ?>
+<?php require('./editComment.php') ?>
 
 <?php include('../layout/_FOOTER.php') ?>
