@@ -1,3 +1,9 @@
+<?php 
+    require_once('../../../connectdb/connectiondb.php'); 
+    
+    $getCategories = mysqli_query($conn, "SELECT * FROM categories");
+?>
+
 <!-- form create article -->
 <div class="formArticle w-full h-full fixed top-0 z-30 bg-slate-200 bg-opacity-75 flex justify-center items-center hidden">
     <div class="bg-white p-4 rounded-lg w-5/6 md:w-3/5 lg:w-2/6 relative">
