@@ -12,8 +12,6 @@
     $folder = '../../img/images/'.$image;
 
     // insert data of article
-    var_dump($title,$image,$tempName);
-
     if(move_uploaded_file($tempName, $folder)) {
         $insertArticle = mysqli_prepare($conn, "INSERT INTO articles(title, content, image, idUser) VALUES(?,?,?,?)");
         mysqli_stmt_bind_param($insertArticle, "sssi", $title, $content, $image, $idUser);
