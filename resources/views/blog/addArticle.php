@@ -16,7 +16,7 @@
             </div>
         </div>
 
-        <form action="./inserArticle.php" method="post">
+        <form action="./inserArticle.php" method="post" enctype="multipart/form-data">
             <div class="w-full">
                 <div class="flex flex-col mb-4">
                     <label for="title">Title</label>
