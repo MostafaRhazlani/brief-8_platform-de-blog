@@ -13,6 +13,10 @@ const popupUser = document.querySelector('.popupUser');
 const showActions = document.querySelectorAll('.showActions');
 const popupActions = document.querySelectorAll('.popupActions');
 
+const showpopupSort = document.querySelector('.showpopupSort');
+const popupSort = document.querySelector('.popupSort');
+
+
 const closeFrom = document.querySelectorAll('.colseForm');
 
 // show form article
@@ -63,6 +67,10 @@ showActions.forEach(show => {
             }
         })
     })
+})
+
+showpopupSort.addEventListener('click', () => {
+    popupSort.classList.toggle('hidden');
 })
 
 // close article

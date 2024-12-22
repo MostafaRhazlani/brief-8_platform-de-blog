@@ -1,9 +1,22 @@
 <?php 
     session_start();
     require_once('../../../connectdb/connectiondb.php'); 
+    
+    $getAllTags = mysqli_query($conn, "SELECT * FROM categories");
 
-    $getCategories = mysqli_query($conn, "SELECT * FROM categories");
-    $getArticles = mysqli_query($conn,"SELECT articles.*, users.username, users.email, users.imageProfile FROM articles inner join users on users.id = articles.idUser ORDER BY id DESC");
+    if(isset($_POST['idTag']) && $_POST['idTag'] != 0) {
+        $idTag = isset($_POST['idTag']) ? $_POST['idTag'] : 0;
+        $getArticles = mysqli_query($conn, "SELECT articles.*, users.username, users.email, users.imageProfile FROM tags 
+                                            INNER JOIN articles ON articles.id = tags.idArticle 
+                                            INNER JOIN users ON users.id = articles.idUser 
+                                            WHERE idCategory = $idTag 
+                                            ORDER BY id DESC");
+    } else {
+        $getArticles = mysqli_query($conn,"SELECT articles.*, users.username, users.email, users.imageProfile FROM articles 
+                                           INNER JOIN users ON users.id = articles.idUser 
+                                           ORDER BY id DESC");
+    }
+
     
 ?>
 
@@ -12,14 +25,33 @@
 
 <div class="w-full md:w-4/6 lg:w-[40%] md:mx-auto pt-24">
     <div class="w-full bg-white shadow-[0px_0px_2px_#9b9b9b] rounded-lg">
-        <?php if(isset($_SESSION['user'])) { ?>
-            <div class="w-full p-4">
-                <div class="showFormArticle py-3 px-5 rounded-md bg-gray-200 text-gray-500 font-medium cursor-pointer hover:bg-gray-300 flex items-center gap-2">
+        <div class="flex flex-col sm:flex-row gap-4 w-full p-4">
+            <?php if(isset($_SESSION['user'])) { ?>
+                <div class="showFormArticle mb-4 sm:mb-0 py-2 sm:w-2/4 px-5 rounded-md bg-gray-200 text-gray-500 font-medium cursor-pointer hover:bg-gray-300 flex items-center gap-2">
                     <i class="fa-solid fa-newspaper"></i>
                     <h1>create article</h1>
                 </div>
+            <?php } ?>
+            <div class="sm:w-2/4 relative">
+                <div class="showpopupSort w-full h-full rounded-md px-5 bg-red-600 text-white font-medium cursor-pointer hover:bg-red-500 flex items-center gap-2">
+                    <span>sort by tag</span>
+                </div>
+                <div class="popupSort hidden absolute w-full flex flex-col bg-white shadow-[0px_0px_5px_1px_#c2c2c2] p-1 rounded-sm top-12">
+                    <?php if($getAllTags) { ?>
+                        <form action="./blog.php" method="post">
+                            <input type="hidden" name="idCategory" value="0">
+                            <button class="w-full text-start px-2 py-1 hover:bg-gray-200">All</button>
+                        </form>
+                        <?php while($tag = mysqli_fetch_assoc($getAllTags)) { ?>
+                            <form action="./blog.php" method="post">
+                                <input type="hidden" name="idTag" value="<?php echo $tag['id'] ?>">
+                                <button class="w-full text-start px-2 py-1 hover:bg-gray-200"><?php echo $tag['nameCategory'] ?></button>
+                            </form>
+                            <?php } ?>
+                    <?php } ?>
+                </div>
             </div>
-        <?php } ?>
+        </div>
         <?php if($getArticles) { ?>
             <?php while($article = mysqli_fetch_assoc($getArticles)) { ?>
                 <div class="w-full mb-3">
