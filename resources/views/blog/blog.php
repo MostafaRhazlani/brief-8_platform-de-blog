@@ -29,7 +29,7 @@
                     <div class="px-6 py-4">
                         <div class="flex justify-between items-center">
                             <div class="flex">
-                                <img class="mr-3 object-cover w-12 h-12 rounded-full" src="/resources/img/<?php echo $article['imageProfile'] ?>" alt="">
+                                <img class="mr-3 object-cover w-12 h-12 rounded-full" src="/resources/img/images/<?php echo $article['imageProfile'] ?>" alt="">
                                 
                                 <div>
                                     <p class="font-semibold"><?php echo $article['username'] ?></p>

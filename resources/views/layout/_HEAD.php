@@ -11,7 +11,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="/resources/css/style.css">
 </head>
-<body class="font-[Roboto]">
+<body class="">
 
 <div class="relative h-full">
     <div class="p-3 md:pl-20 fixed top-0 z-20 bg-white w-full shadow-[0px_0px_5px_1px_#c2c2c2]">
@@ -25,7 +25,7 @@
                                     <i class="fa-solid fa-circle-chevron-down"></i>
                                 </span>
                             </div>
-                            <img class="w-16 h-16 object-cover rounded-full" src="/resources/img/<?php echo $_SESSION['user']['imageProfile'] ?>" alt="">
+                            <img class="w-16 h-16 object-cover rounded-full" src="/resources/img/images/<?php echo $_SESSION['user']['imageProfile'] ?>" alt="">
                         </div>
         
                         <div class="popupUser hidden absolute mt-2 w-32 bg-white shadow-[0px_0px_5px_1px_#c2c2c2] p-2 rounded-md">

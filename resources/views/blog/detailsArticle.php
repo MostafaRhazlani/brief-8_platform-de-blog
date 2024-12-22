@@ -21,7 +21,7 @@
             <div class="px-6 py-4">
                 <div class="flex justify-between items-center">
                     <div class="flex">
-                        <img class="mr-3 object-cover w-12 h-12 rounded-full" src="/resources/img/<?php echo $resultArticle['imageProfile'] ?>" alt="">
+                        <img class="mr-3 object-cover w-12 h-12 rounded-full" src="/resources/img/images/<?php echo $resultArticle['imageProfile'] ?>" alt="">
                         
                         <div>
                             <p class="font-semibold"><?php echo $resultArticle['username'] ?></p>
@@ -138,11 +138,9 @@
                         <?php if($getComments) { ?>
                             <?php while($comment = mysqli_fetch_assoc($getComments)) { ?>
                                 <div class="flex flex-col mb-5">
-                                    <div class="flex">
+                                    <div class="flex items-start">
                                         <!-- image owner comment -->
-                                        <div class="overflow-hidden w-10 h-10 rounded-full mr-2">
-                                            <img class="object-contain" src="/resources/img/<?php echo $comment['imageProfile'] ?>" alt="">
-                                        </div>
+                                        <img class="rounded-full object-cover w-10 h-10 mr-2" src="/resources/img/images/<?php echo $comment['imageProfile'] ?>" alt="cover image">
                                         <div class="max-w-[90%]">
                                             <div class="text-[14px] flex justify-between items-center gap-10">
                                                 <p><?php echo (isset($_SESSION['user']) && $comment['username'] == $_SESSION['user']['username']) ? 'You' : $comment['username'] ?></p>
