@@ -16,3 +16,11 @@ input[type="file"]::file-selector-button:hover {
 .hideScrollbar::-webkit-scrollbar {
     display: none;
 }
+
+.inputImage[type="file"] {
+    color: transparent;
+}
+
+.inputImage[type="file"]::file-selector-button {
+    display: none;
+}
