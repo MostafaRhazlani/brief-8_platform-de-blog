@@ -52,7 +52,7 @@
                 
             </div>
             <div class="h-80 flex items-center justify-center bg-[#200E32]">
-                <img class="h-full object-contain" src="../../img/istockphoto-1392528328-612x612.jpg" alt="">
+                <img class="h-full object-contain" src="../../img/images/<?php echo $resultArticle['image'] ?>" alt="">
             </div>
             <div class="flex gap-1 flex-wrap py-4 px-6">
                 <?php

@@ -24,7 +24,7 @@
             <?php while($article = mysqli_fetch_assoc($getArticles)) { ?>
                 <div class="w-full mb-3">
                     <div class="h-80 flex items-center justify-center bg-[#200E32]">
-                        <img class="h-full object-contain" src="../../img/istockphoto-1392528328-612x612.jpg" alt="">
+                        <img class="h-full object-contain" src="../../img/images/<?php echo $article['image'] ?>" alt="">
                     </div>
                     <div class="px-6 py-4">
                         <div class="flex justify-between items-center">
