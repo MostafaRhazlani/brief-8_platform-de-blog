@@ -1,9 +1,10 @@
 <?php
+    
     session_start();
     require_once('../../../connectdb/connectiondb.php');
-
+    
     // get all names in input
-
+    
     if(isset($_POST['idArticle'])) {
         $idArticle = $_POST['idArticle'];
         $title = isset($_POST['title']) ? $_POST['title'] : '';
@@ -11,6 +12,17 @@
         $idCategory = isset($_POST['idCategory']) ? $_POST['idCategory'] : [];
         $image = isset($_POST['image']) ? $_POST['image'] : '';
         
+        $deleteCategories = mysqli_prepare($conn, "DELETE FROM tags WHERE idArticle = ?");
+        mysqli_stmt_bind_param($deleteCategories, "i", $idArticle);
+        mysqli_stmt_execute($deleteCategories);
+    
+        
+        $insertCategory = mysqli_prepare($conn, "INSERT INTO tags (idArticle, idCategory) VALUES (?,?)");
+        foreach ($idCategory as $category) {
+            mysqli_stmt_bind_param($insertCategory, "ii", $idArticle, $category);
+            mysqli_stmt_execute($insertCategory);
+        }
+
         $updateArticle = mysqli_prepare($conn, "UPDATE articles SET title = ?, content = ?, image = ? WHERE id = ?");
         mysqli_stmt_bind_param($updateArticle, "sssi", $title, $content, $image, $idArticle);
         if(mysqli_stmt_execute($updateArticle)) {
