@@ -36,7 +36,7 @@
             </div>
         </div>
 
-        <form action="./updateArticle.php" method="post">
+        <form action="./updateArticle.php" method="post" enctype="multipart/form-data">
             <div class="w-full">
                 <?php if($resultArticle) { ?>
                     <div class="flex flex-col mb-4">
