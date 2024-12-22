@@ -3,7 +3,7 @@
     require_once('../../../connectdb/connectiondb.php'); 
 
     $getCategories = mysqli_query($conn, "SELECT * FROM categories");
-    $getArticles = mysqli_query($conn,"SELECT articles.*, users.username, users.email FROM articles inner join users on users.id = articles.idUser ORDER BY id DESC");
+    $getArticles = mysqli_query($conn,"SELECT articles.*, users.username, users.email, users.imageProfile FROM articles inner join users on users.id = articles.idUser ORDER BY id DESC");
     
 ?>
 
@@ -29,7 +29,7 @@
                     <div class="px-6 py-4">
                         <div class="flex justify-between items-center">
                             <div class="flex">
-                                <img class="mr-3 object-cover w-12 h-12 rounded-full" src="../../img/149071.png" alt="">
+                                <img class="mr-3 object-cover w-12 h-12 rounded-full" src="/resources/img/<?php echo $article['imageProfile'] ?>" alt="">
                                 
                                 <div>
                                     <p class="font-semibold"><?php echo $article['username'] ?></p>

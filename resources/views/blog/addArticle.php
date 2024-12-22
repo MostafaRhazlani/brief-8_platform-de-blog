@@ -8,7 +8,7 @@
         <h1 class="text-center font-semibold text-xl mb-3">Create article</h1>
 
         <div class="flex mb-4 border-t-2 py-3">
-            <img class="mr-3 object-cover w-10 h-10 rounded-full" src="../../img/istockphoto-1392528328-612x612.jpg" alt="">
+            <img class="mr-3 object-cover w-10 h-10 rounded-full" src="/resources/img/<?php echo $_SESSION['user']['imageProfile'] ?>" alt="">
             
             <div>
                 <p class="text-sm"><?php echo $_SESSION['user']['username'] ?></p>

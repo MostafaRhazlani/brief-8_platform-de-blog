@@ -6,10 +6,10 @@
 
     $getCategories = mysqli_query($conn, "SELECT * FROM categories");
 
-    $getArticles = mysqli_query($conn,"SELECT articles.*, users.username, users.email FROM articles inner join users on users.id = articles.idUser WHERE articles.id = $idArticle");
+    $getArticles = mysqli_query($conn,"SELECT articles.*, users.username, users.email, users.imageProfile FROM articles inner join users on users.id = articles.idUser WHERE articles.id = $idArticle");
     $resultArticle = mysqli_fetch_assoc($getArticles);
 
-    $getComments = mysqli_query($conn, "SELECT comments.*, email, username, idRole FROM comments JOIN users ON users.id = comments.idUser WHERE idArticle = $idArticle ORDER BY id DESC");
+    $getComments = mysqli_query($conn, "SELECT comments.*, email, username, imageProfile, idRole FROM comments JOIN users ON users.id = comments.idUser WHERE idArticle = $idArticle ORDER BY id DESC");
 ?>
 
 <?php include('../layout/_HEAD.php') ?>
@@ -21,7 +21,7 @@
             <div class="px-6 py-4">
                 <div class="flex justify-between items-center">
                     <div class="flex">
-                        <img class="mr-3 object-cover w-12 h-12 rounded-full" src="../../img/149071.png" alt="">
+                        <img class="mr-3 object-cover w-12 h-12 rounded-full" src="/resources/img/<?php echo $resultArticle['imageProfile'] ?>" alt="">
                         
                         <div>
                             <p class="font-semibold"><?php echo $resultArticle['username'] ?></p>
@@ -133,17 +133,18 @@
                         </a>
                     </div>
                 </div>
-                <div class="rounded-md bg-gray-200 h-96 p-3 mb-16 md:mb-0 flex flex-col justify-between">
+                <div class="rounded-md bg-gray-200 h-[500px] p-3 mb-16 md:mb-0 flex flex-col justify-between">
                     <div class="overflow-y-scroll hideScrollbar mb-2">
                         <?php if($getComments) { ?>
                             <?php while($comment = mysqli_fetch_assoc($getComments)) { ?>
                                 <div class="flex flex-col mb-5">
-                                    <div class="flex items-start">
+                                    <div class="flex">
                                         <!-- image owner comment -->
-                                        <img class="mr-2 mt-1" width="40px" height="40" src="../../img/149071.png" alt="">
-
-                                        <div class="p-2 rounded-lg <?php echo (isset($_SESSION['user']) && $comment['idUser'] == $_SESSION['user']['id']) ? 'bg-[#553674] text-white' : 'bg-white'?> <?php if($comment['idRole'] == 1) echo ' bg-yellow-400 border-2 border-yellow-700' ?>">
-                                            <div class="text-[14px] mb-2 flex justify-between items-center gap-8">
+                                        <div class="overflow-hidden w-10 h-10 rounded-full mr-2">
+                                            <img class="object-contain" src="/resources/img/<?php echo $comment['imageProfile'] ?>" alt="">
+                                        </div>
+                                        <div class="max-w-[90%]">
+                                            <div class="text-[14px] flex justify-between items-center gap-10">
                                                 <p><?php echo (isset($_SESSION['user']) && $comment['username'] == $_SESSION['user']['username']) ? 'You' : $comment['username'] ?></p>
                                                 
                                                 <?php if(isset($_SESSION['user'])) { ?>
@@ -152,11 +153,14 @@
                                                             <i class="fa-solid fa-ellipsis"></i>
                                                         </span>
 
-                                                        <?php if(isset($_SESSION['user']) && $_SESSION['user']['id'] == $comment['idUser'] || isset($_SESSION['user']) && $_SESSION['user']['id'] == $resultArticle['idUser']) { ?>
-                                                            <div class="popupActions absolute hidden top-6 -right-2 bg-white shadow-[0px_0px_5px_1px_#c2c2c2] p-1 rounded-sm" data-id="<?php echo $comment['id'] ?>">
-                                                                <a href="./detailsArticle.php?idArticle=<?php echo $idArticle ?>&idEditComment=<?php echo $comment['id'] ?>" class="flex items-center text-sm text-black w-32 p-1 hover:bg-gray-200 cursor-pointer rounded-sm <?php if(isset($_SESSION['user']) && $_SESSION['user']['id'] == $resultArticle['idUser']) echo 'hidden' ?>">
-                                                                    <i class="fa-solid fa-pen-to-square"></i>&nbsp;Edit comment
-                                                                </a>
+                                                        <?php 
+                                                        if (isset($_SESSION['user']) && ($_SESSION['user']['id'] == $comment['idUser'] || $_SESSION['user']['id'] == $resultArticle['idUser'])) { ?>
+                                                            <div class="popupActions absolute hidden top-6 -right-4 bg-white shadow-[0px_0px_5px_1px_#c2c2c2] p-1 rounded-sm" data-id="<?php echo $comment['id'] ?>">
+                                                                <?php if ($_SESSION['user']['id'] == $comment['idUser']) { ?>
+                                                                    <a href="./detailsArticle.php?idArticle=<?php echo $idArticle ?>&idEditComment=<?php echo $comment['id'] ?>" class="flex items-center text-sm text-black w-32 p-1 hover:bg-gray-200 cursor-pointer rounded-sm">
+                                                                        <i class="fa-solid fa-pen-to-square"></i>&nbsp;Edit comment
+                                                                    </a>
+                                                                <?php } ?>
                                                                 <a href="./detailsArticle.php?idArticle=<?php echo $idArticle ?>&idComment=<?php echo $comment['id'] ?>" class="flex items-center text-sm text-red-600 w-32 p-1 hover:bg-red-200 cursor-pointer rounded-sm">
                                                                     <i class="fa-solid fa-trash-can"></i>&nbsp;Delete comment
                                                                 </a>
@@ -165,8 +169,11 @@
                                                     </div>
                                                 <?php } ?>
                                             </div>
-                                            <p class="break-all"><?php echo $comment['content'] ?></p>
+                                            <div class=" p-2 rounded-[0_8px_8px_8px] <?php echo (isset($_SESSION['user']) && $comment['idUser'] == $_SESSION['user']['id']) ? 'bg-[#553674] text-white' : 'bg-white'?> <?php if($comment['idRole'] == 1) echo ' bg-yellow-400 border-2 border-yellow-700' ?>">
+                                                <p class="break-all"><?php echo $comment['content'] ?></p>
+                                            </div>
                                         </div>
+                                        
                                     </div>
                                     <div class="ml-14 flex text-[12px] gap-3 mt-1 text-gray-600">
                                         <p>2h ago</p>
