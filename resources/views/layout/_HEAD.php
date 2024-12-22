@@ -25,7 +25,7 @@
                                     <i class="fa-solid fa-circle-chevron-down"></i>
                                 </span>
                             </div>
-                            <img width="60" class="rounded-full" src="/resources/img/photo youcode.jpg" alt="">
+                            <img class="w-16 h-16 object-cover rounded-full" src="/resources/img/<?php echo $_SESSION['user']['imageProfile'] ?>" alt="">
                         </div>
         
                         <div class="popupUser hidden absolute mt-2 w-32 bg-white shadow-[0px_0px_5px_1px_#c2c2c2] p-2 rounded-md">
