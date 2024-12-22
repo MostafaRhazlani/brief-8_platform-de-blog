@@ -6,7 +6,10 @@
     $email = isset($_POST['email']) ? $_POST['email'] : '';
     $password = isset($_POST['password']) ? $_POST['password'] : '';
     $confirm_password = isset($_POST['confirm_password']) ? $_POST['confirm_password'] : '';
-
+    $imageProfile = isset($_FILES['imageProfile']['name']) ? $_FILES['imageProfile']['name'] : '149071.png';
+    $tempImageProfile = isset($_FILES['imageProfile']['tmp_name']) ? $_FILES['imageProfile']['tmp_name'] : '';
+    $folder = '../../img/images/'. $imageProfile;
+    
     $countErrors = array();
 
     // check if input username is empty
@@ -47,11 +50,13 @@
     }
 
     if(count($countErrors) == 0) {
+        
+        move_uploaded_file($tempImageProfile, $folder);
         $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
         $idRole = 2;
-        $resultQuery = mysqli_prepare($conn, "INSERT INTO users(username, email, password, idRole) VALUES(?,?,?,?)");
+        $resultQuery = mysqli_prepare($conn, "INSERT INTO users(username, email, password, imageProfile, idRole) VALUES(?,?,?,?,?)");
 
-        mysqli_stmt_bind_param($resultQuery, "sssi", $username, $email, $hashedPassword, $idRole);
+        mysqli_stmt_bind_param($resultQuery, "ssssi", $username, $email, $hashedPassword, $imageProfile, $idRole);
 
         if(mysqli_stmt_execute($resultQuery)) {
             header('location: login.php');
