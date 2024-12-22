@@ -6,11 +6,18 @@
     $email = isset($_POST['email']) ? $_POST['email'] : '';
     $password = isset($_POST['password']) ? $_POST['password'] : '';
     $confirm_password = isset($_POST['confirm_password']) ? $_POST['confirm_password'] : '';
-    $imageProfile = isset($_FILES['imageProfile']['name']) ? $_FILES['imageProfile']['name'] : '149071.png';
+    $imageProfile = isset($_FILES['imageProfile']['name']) ? $_FILES['imageProfile']['name'] : 'default.png';
     $tempImageProfile = isset($_FILES['imageProfile']['tmp_name']) ? $_FILES['imageProfile']['tmp_name'] : '';
     $folder = '../../img/images/'. $imageProfile;
-    
+
     $countErrors = array();
+
+
+    if(!empty($tempImageProfile)) {
+        move_uploaded_file($tempImageProfile, $folder);
+    } else {
+        $imageProfile = 'default.png';
+    }
 
     // check if input username is empty
     if(empty($username)) {
@@ -51,7 +58,6 @@
 
     if(count($countErrors) == 0) {
         
-        move_uploaded_file($tempImageProfile, $folder);
         $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
         $idRole = 2;
         $resultQuery = mysqli_prepare($conn, "INSERT INTO users(username, email, password, imageProfile, idRole) VALUES(?,?,?,?,?)");

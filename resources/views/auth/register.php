@@ -16,14 +16,14 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="/resources/css/style.css">
 </head>
-<body class="font-[Poppins]">
+<body>
     <div class="h-screen w-full">
         <div class="w-5/6 md:w-3/6 lg:w-2/6 mx-auto mt-20 bg-white shadow-[0px_0px_4px_#a5a4a4] rounded-md p-4">
             <h1 class="text-4xl text-center mb-8">Sgin up</h1>
             <form action="./newUser.php" method="post" enctype="multipart/form-data">
                 <div class="flex justify-center flex-col items-center mb-6">
-                    <div class="relative">
-                        <img src="/resources/img/149071.png" alt="user" class="h-28 w-28 rounded-full">
+                    <div class="relative hover:opacity-75">
+                        <img src="/resources/img/images/default.png" alt="user" class="h-28 w-28 rounded-full">
                         <input type="file" class="inputImage h-28 w-28 border-[3px] border-red-600 cursor-pointer absolute top-0 rounded-full" name="imageProfile">
                     </div>
                     <p class="font-semibold text-red-600">Upload image</p>
